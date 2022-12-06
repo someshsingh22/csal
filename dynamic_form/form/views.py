@@ -1,15 +1,24 @@
-from django.forms import modelformset_factory
+import random
 from django.shortcuts import render
-from .models import IntroductoryQuestionnaire
+from .models import Brand, SurveyForm
 from django.contrib.auth.decorators import login_required
 
+NUM_OPTIONS = 15
+
+
 @login_required
-def introduction(request):
-    IntroductoryQuestionnaireFormSet = modelformset_factory(IntroductoryQuestionnaire, exclude=("user",))
-    if request.method == 'POST':
-        formset = IntroductoryQuestionnaireFormSet(request.POST)
-        if formset.is_valid():
-            formset.save()
+def intro_survey(request):
+    if request.method == "POST":
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "thankyou.html")
     else:
-        formset = IntroductoryQuestionnaireFormSet()
-    return render(request, 'introduction.html', {'formset': formset})
+        form = SurveyForm(initial={"user": request.user})
+        sampling = ["seen_brands", "produse_brands", "pastuse_brands"]
+        randoms = Brand.objects.order_by("?")[: NUM_OPTIONS * len(sampling)]
+        for i, field in enumerate(sampling):
+            form.fields[field].queryset = randoms[
+                i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
+            ]
+    return render(request, "introduction.html", {"form": form})

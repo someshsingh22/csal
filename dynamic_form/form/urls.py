@@ -1,6 +1,6 @@
 from django.urls import path, include
-from .views import introduction
+from .views import intro_survey
 
 urlpatterns = [
-    path('', introduction, name='introduction'),
+    path("", intro_survey, name="intro_survey"),
 ]

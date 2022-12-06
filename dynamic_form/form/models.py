@@ -1,48 +1,41 @@
 from django.db import models
-from django.conf import settings
-
-User = settings.AUTH_USER_MODEL
+from django.contrib.auth.models import User
 
 from django.db import models
+from django import forms
 
-class IntroductoryQuestionnaire(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    # I remember seeing ads for the following brands this year
-    brands_seen = models.TextField()
-    
-    # I remember using products of the following brands this year
-    brands_used = models.TextField()
-    
-    # I have used these brands at least once in the past
-    past_brands_used = models.TextField()
-    
-    # Have you installed any Ad Blocking software in your browser(s)?
+
+class Brand(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Survey(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    seen_brands = models.ManyToManyField(Brand)
+    produse_brands = models.ManyToManyField(Brand, related_name="seen_brands")
+    pastuse_brands = models.ManyToManyField(Brand, related_name="produse_brands")
     ad_blocking = models.BooleanField()
-    
-    # Do you use a Youtube subscription?
-    youtube_subscription = models.BooleanField()
-    
-    # Approximately how much percentage of time do you spend on Youtube mobile vs Youtube web?
-    youtube_mobile_vs_web = models.CharField(max_length=100)
-    
-    # How do you apprise yourself of the latest products and brands? (Multi correct)
-    product_awareness = models.TextField()
-    
-    # How many percentage marks did you score in your 12th standard?
-    twelfth_marks = models.FloatField()
-    
-    # What was your BITSAT rank?
-    bitsat_rank = models.IntegerField()
-    
-    # What is your current GPA?
-    gpa = models.FloatField()
-    
-    # For the following sectors, name top-5 brands and their products that you have used in the past or are currently using:
-    # (Name the product even if you don’t know the brand which produced it)
-    food_brands = models.TextField()
-    automobiles_brands = models.TextField()
-    clothing_brands = models.TextField()
-    cosmetics_brands = models.TextField()
-    electronics_brands = models.TextField()
-    telecom_brands = models.TextField()
-    healthcare_brands = models.TextField()
+    yt_sub = models.BooleanField()
+
+
+class SurveyForm(forms.ModelForm):
+    class Meta:
+        model = Survey
+        fields = ["seen_brands", "ad_blocking"]
+        widgets = {
+            "seen_brands": forms.CheckboxSelectMultiple,
+            "produse_brands": forms.CheckboxSelectMultiple,
+            "pastuse_brands": forms.CheckboxSelectMultiple,
+            "ad_blocking": forms.CheckboxInput,
+            "yt_sub": forms.CheckboxInput,
+        }
+        labels = {
+            "seen_brands": "I remember seeing ads for the following brands this year",
+            "produse_brands": "I remember using products of the following brands this year",
+            "pastuse_brands": "I have used these brands at least once in the past",
+            "ad_blocking": "I use ad blocking software",
+            "yt_sub": "Do you use a Youtube subscription?",
+        }
