@@ -14,9 +14,9 @@ class Brand(models.Model):
 
 class Survey(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    seen_brands = models.ManyToManyField(Brand)
-    produse_brands = models.ManyToManyField(Brand, related_name="seen_brands")
-    pastuse_brands = models.ManyToManyField(Brand, related_name="produse_brands")
+    seen_brands = models.ManyToManyField(Brand, related_name='seen')
+    produse_brands = models.ManyToManyField(Brand, related_name='produse')
+    pastuse_brands = models.ManyToManyField(Brand, related_name='pastuse')
     ad_blocking = models.BooleanField()
     yt_sub = models.BooleanField()
 
@@ -24,7 +24,13 @@ class Survey(models.Model):
 class SurveyForm(forms.ModelForm):
     class Meta:
         model = Survey
-        fields = ["seen_brands", "ad_blocking"]
+        fields = [
+            "seen_brands",
+            "produse_brands",
+            "pastuse_brands",
+            "ad_blocking",
+            "yt_sub",
+            ]
         widgets = {
             "seen_brands": forms.CheckboxSelectMultiple,
             "produse_brands": forms.CheckboxSelectMultiple,
@@ -38,4 +44,5 @@ class SurveyForm(forms.ModelForm):
             "pastuse_brands": "I have used these brands at least once in the past",
             "ad_blocking": "I use ad blocking software",
             "yt_sub": "Do you use a Youtube subscription?",
+            "nouse_brands": "I have never used these brands",
         }

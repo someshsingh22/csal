@@ -3,6 +3,8 @@ from django.shortcuts import render
 from .models import Brand, SurveyForm
 from django.contrib.auth.decorators import login_required
 
+import logging
+
 NUM_OPTIONS = 15
 
 
@@ -17,6 +19,7 @@ def intro_survey(request):
         form = SurveyForm(initial={"user": request.user})
         sampling = ["seen_brands", "produse_brands", "pastuse_brands"]
         randoms = Brand.objects.order_by("?")[: NUM_OPTIONS * len(sampling)]
+        logging.debug(vars(form.fields["seen_brands"]))
         for i, field in enumerate(sampling):
             form.fields[field].queryset = randoms[
                 i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
