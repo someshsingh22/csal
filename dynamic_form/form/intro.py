@@ -60,6 +60,8 @@ class SurveyForm(forms.ModelForm):
         widget=forms.RadioSelect,
     )
 
+    ad_blocking = forms.TypedChoiceField(coerce=lambda x: x =='True', choices=((False, 'No'), (True, 'Yes')))
+    yt_sub = forms.TypedChoiceField(coerce=lambda x: x =='True', choices=((False, 'No'), (True, 'Yes')))
     class Meta:
         model = Survey
         fields = [
@@ -78,8 +80,6 @@ class SurveyForm(forms.ModelForm):
             "seen_brands": forms.CheckboxSelectMultiple,
             "produse_brands": forms.CheckboxSelectMultiple,
             "pastuse_brands": forms.CheckboxSelectMultiple,
-            "ad_blocking": forms.CheckboxInput,
-            "yt_sub": forms.CheckboxInput,
             "apprise_methods": forms.CheckboxSelectMultiple,
         }
         labels = {
@@ -88,7 +88,6 @@ class SurveyForm(forms.ModelForm):
             "pastuse_brands": "I have used these brands at least once in the past",
             "ad_blocking": "I use ad blocking software",
             "yt_sub": "Do you use a Youtube subscription?",
-            "nouse_brands": "I have never used these brands",
             "youtube_percentage": "Approximately how much percentage of time do you spend on Youtube mobile vs Youtube web?",
             "apprise_methods": "How do you apprise yourself of the latest products and brands?",
             "gpa": "What is your CGPA?",
@@ -104,6 +103,12 @@ class SurveyForm(forms.ModelForm):
                 widgets[f"brand_{sector}_{option}"] = forms.TextInput()
                 widgets[f"product_{sector}_{option}"] = forms.TextInput()
 
+    def __init__(self, *args, **kwargs):
+        super(SurveyForm, self).__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            if not name.startswith("brand_") or name.startswith("product_"):
+                # add class to all field labels
+                pass
 
 @login_required
 def intro_survey(request):
