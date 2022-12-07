@@ -1,4 +1,5 @@
 import random
+import json
 from django.shortcuts import render
 from .models import Brand, SurveyForm
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 import logging
 
 NUM_OPTIONS = 15
-
+SECTORS = json.load(open("data/sectors.json"))
 
 @login_required
 def intro_survey(request):
@@ -24,4 +25,4 @@ def intro_survey(request):
             form.fields[field].queryset = randoms[
                 i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
             ]
-    return render(request, "introduction.html", {"form": form})
+    return render(request, "introduction.html", {"form": form, "sectors": SECTORS})

@@ -3,3 +3,9 @@
     {{ form.as_p }}
     <button type="submit">Submit</button>
 </form>
+
+<ul>
+    {% for sector in sectors %}
+        <li>{{ sector }}</li>
+    {% endfor %}
+</ul>

@@ -1,9 +1,14 @@
+import json
+
 from django.db import models
 from django.contrib.auth.models import User
 
 from django.db import models
 from django import forms
+from django.core.validators import MinValueValidator, MaxValueValidator
 
+SECTORS = json.load(open("data/sectors.json"))
+NUM_BRAND_PRODUCT_OPTIONS = 3
 
 class Brand(models.Model):
     name = models.CharField(max_length=255)
@@ -28,6 +33,11 @@ class Survey(models.Model):
     yt_sub = models.BooleanField()
     youtube_percentage = models.IntegerField()
     apprise_methods = models.ManyToManyField(AppriseMethod)
+    gpa = models.FloatField(validators=[MinValueValidator(4.0), MaxValueValidator(10.0)])
+    for sector in SECTORS:
+        for option in range(NUM_BRAND_PRODUCT_OPTIONS):
+            locals()[f"brand_{sector}_{option}"] = models.CharField(max_length=255, blank=True, default="")
+            locals()[f"product_{sector}_{option}"] = models.CharField(max_length=255, blank=False, null=False)
 
 
 class SurveyForm(forms.ModelForm):
@@ -52,6 +62,7 @@ class SurveyForm(forms.ModelForm):
             "yt_sub",
             "youtube_percentage",
             "apprise_methods",
+            "gpa"
         ]
         widgets = {
             "seen_brands": forms.CheckboxSelectMultiple,
@@ -70,4 +81,15 @@ class SurveyForm(forms.ModelForm):
             "nouse_brands": "I have never used these brands",
             "youtube_percentage": "Approximately how much percentage of time do you spend on Youtube mobile vs Youtube web?",
             "apprise_methods": "How do you apprise yourself of the latest products and brands?",
+            "gpa": "What is your CGPA?",
         }
+        for sector in SECTORS:
+            for option in range(NUM_BRAND_PRODUCT_OPTIONS):
+                fields.append(f"brand_{sector}_{option}")
+                fields.append(f"product_{sector}_{option}")
+
+                labels[f"brand_{sector}_{option}"] = "Brand"
+                labels[f"product_{sector}_{option}"] = "Product"
+
+                widgets[f"brand_{sector}_{option}"] = forms.TextInput()
+                widgets[f"product_{sector}_{option}"] = forms.TextInput()
