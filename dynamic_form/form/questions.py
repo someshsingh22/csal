@@ -144,16 +144,17 @@ def overall_survey(request):
         form.fields["remembered_brands"].queryset = final_brands.order_by("?")
     return render(request, "short_term.html", {"form": form})
 
+ANSWERED = 0
 
 def brand_survey(request):
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "thankyou.html")
+        return render(request, "thankyou.html")
     else:
-        survey = OverallQuestionSurvey.objects.get(exp__user=request.user).last()
+        survey = OverallQuestionSurvey.objects.get(exp__user=request.user)
         brands = survey.remembered_brands.all()
         exp = Experience.objects.get(user=request.user)
         forms = [RememberedBrandForm(initial={"experience": exp, "brand": brand}) for brand in brands]
-    return render(request, "brand_survey.html", {"forms": forms})
+        return render(request, "brand_survey.html", {"forms": forms})
