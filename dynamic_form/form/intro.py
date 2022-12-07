@@ -1,31 +1,15 @@
 import json
 
 from django.db import models
-from django.contrib.auth.models import User
-
-from django.db import models
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 SECTORS = json.load(open("data/sectors.json"))
 NUM_BRAND_PRODUCT_OPTIONS = 3
-
-
-class Video(models.Model):
-    name = models.CharField(max_length=255)
-    url = models.URLField()
-    brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class Experience(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    videos = models.ManyToManyField(Video)
-
-    def __str__(self):
-        return self.user.username + " " + str(self.videos.all())
+NUM_OPTIONS = 15
 
 
 class Brand(models.Model):
@@ -117,3 +101,21 @@ class SurveyForm(forms.ModelForm):
 
                 widgets[f"brand_{sector}_{option}"] = forms.TextInput()
                 widgets[f"product_{sector}_{option}"] = forms.TextInput()
+
+
+@login_required
+def intro_survey(request):
+    if request.method == "POST":
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "thankyou.html")
+    else:
+        form = SurveyForm(initial={"user": request.user})
+        sampling = ["seen_brands", "produse_brands", "pastuse_brands"]
+        randoms = Brand.objects.order_by("?")[: NUM_OPTIONS * len(sampling)]
+        for i, field in enumerate(sampling):
+            form.fields[field].queryset = randoms[
+                i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
+            ]
+    return render(request, "introduction.html", {"form": form, "sectors": SECTORS})

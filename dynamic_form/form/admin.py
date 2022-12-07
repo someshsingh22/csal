@@ -1,9 +1,9 @@
 from django.contrib import admin
-
-from .models import Brand, AppriseMethod, Video, Experience
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
+from . intro import Brand, AppriseMethod
+from . questions import Video, Experience, Emotions
 
 class BrandResource(resources.ModelResource):
     class Meta:
@@ -24,6 +24,9 @@ class ExperienceResource(resources.ModelResource):
     class Meta:
         model = Experience
 
+class EmotionsResource(resources.ModelResource):
+    class Meta:
+        model = Emotions
 
 class BrandAdmin(ImportExportModelAdmin):
     resource_class = BrandResource
@@ -40,9 +43,12 @@ class VideoAdmin(ImportExportModelAdmin):
 class ExperienceAdmin(ImportExportModelAdmin):
     resource_class = ExperienceResource
 
+class EmotionsAdmin(ImportExportModelAdmin):
+    resource_class = EmotionsResource
+
 
 for model_name, admin_name in zip(
-    [Brand, AppriseMethod, Video, Experience],
-    [BrandAdmin, AppriseMethodAdmin, VideoAdmin, ExperienceAdmin],
+    [Brand, AppriseMethod, Video, Experience, Emotions],
+    [BrandAdmin, AppriseMethodAdmin, VideoAdmin, ExperienceAdmin, EmotionsAdmin],
 ):
     admin.site.register(model_name, admin_name)
