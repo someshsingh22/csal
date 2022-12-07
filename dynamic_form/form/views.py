@@ -9,6 +9,7 @@ import logging
 NUM_OPTIONS = 15
 SECTORS = json.load(open("data/sectors.json"))
 
+
 @login_required
 def intro_survey(request):
     if request.method == "POST":

@@ -10,6 +10,24 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 SECTORS = json.load(open("data/sectors.json"))
 NUM_BRAND_PRODUCT_OPTIONS = 3
 
+
+class Video(models.Model):
+    name = models.CharField(max_length=255)
+    url = models.URLField()
+    brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Experience(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    videos = models.ManyToManyField(Video)
+
+    def __str__(self):
+        return self.user.username + " " + str(self.videos.all())
+
+
 class Brand(models.Model):
     name = models.CharField(max_length=255)
 
@@ -33,11 +51,17 @@ class Survey(models.Model):
     yt_sub = models.BooleanField()
     youtube_percentage = models.IntegerField()
     apprise_methods = models.ManyToManyField(AppriseMethod)
-    gpa = models.FloatField(validators=[MinValueValidator(4.0), MaxValueValidator(10.0)])
+    gpa = models.FloatField(
+        validators=[MinValueValidator(4.0), MaxValueValidator(10.0)]
+    )
     for sector in SECTORS:
         for option in range(NUM_BRAND_PRODUCT_OPTIONS):
-            locals()[f"brand_{sector}_{option}"] = models.CharField(max_length=255, blank=True, default="")
-            locals()[f"product_{sector}_{option}"] = models.CharField(max_length=255, blank=False, null=False)
+            locals()[f"brand_{sector}_{option}"] = models.CharField(
+                max_length=255, blank=True, default=""
+            )
+            locals()[f"product_{sector}_{option}"] = models.CharField(
+                max_length=255, blank=False, null=False
+            )
 
 
 class SurveyForm(forms.ModelForm):
@@ -62,7 +86,7 @@ class SurveyForm(forms.ModelForm):
             "yt_sub",
             "youtube_percentage",
             "apprise_methods",
-            "gpa"
+            "gpa",
         ]
         widgets = {
             "seen_brands": forms.CheckboxSelectMultiple,
