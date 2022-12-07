@@ -63,6 +63,7 @@ class SurveyForm(forms.ModelForm):
     class Meta:
         model = Survey
         fields = [
+            "user",
             "seen_brands",
             "produse_brands",
             "pastuse_brands",
@@ -73,6 +74,7 @@ class SurveyForm(forms.ModelForm):
             "gpa",
         ]
         widgets = {
+            "user": forms.HiddenInput,
             "seen_brands": forms.CheckboxSelectMultiple,
             "produse_brands": forms.CheckboxSelectMultiple,
             "pastuse_brands": forms.CheckboxSelectMultiple,
@@ -118,4 +120,4 @@ def intro_survey(request):
             form.fields[field].queryset = randoms[
                 i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
             ]
-    return render(request, "introduction.html", {"form": form, "sectors": SECTORS})
+    return render(request, "introduction.html", {"form": form})

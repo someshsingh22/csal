@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+import tablib, json
 
 from . intro import Brand, AppriseMethod
 from . questions import Video, Experience, Emotions
@@ -52,3 +53,10 @@ for model_name, admin_name in zip(
     [BrandAdmin, AppriseMethodAdmin, VideoAdmin, ExperienceAdmin, EmotionsAdmin],
 ):
     admin.site.register(model_name, admin_name)
+
+
+
+tbd = [(BrandResource(), "data/brands.json"),(AppriseMethodResource(), "data/apprise_method.json"),(VideoResource(), "data/video.json"),(ExperienceResource(), "data/experience.json"),(EmotionsResource(), "data/emotions.json"),]
+for resource, file_name in tbd:
+    dataset = tablib.Dataset().load(open(file_name), format='json')
+    resource.import_data(dataset, dry_run=False)
