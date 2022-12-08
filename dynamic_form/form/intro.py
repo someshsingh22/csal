@@ -58,13 +58,18 @@ class SurveyForm(forms.ModelForm):
     youtube_percentage = forms.ChoiceField(
         choices=YOUTUBE_PERCENTAGE_CHOICES,
         widget=forms.RadioSelect,
+        label="Approximately how much percentage of time do you spend on Youtube mobile vs Youtube web?",
     )
 
     ad_blocking = forms.TypedChoiceField(
-        coerce=lambda x: x == "True", choices=((False, "No"), (True, "Yes"))
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="I use ad blocking software",
     )
     yt_sub = forms.TypedChoiceField(
-        coerce=lambda x: x == "True", choices=((False, "No"), (True, "Yes"))
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Do you use a Youtube subscription?",
     )
 
     class Meta:
@@ -85,20 +90,19 @@ class SurveyForm(forms.ModelForm):
             "seen_brands": forms.CheckboxSelectMultiple,
             "produse_brands": forms.CheckboxSelectMultiple,
             "pastuse_brands": forms.CheckboxSelectMultiple,
+            "ad_blocking": forms.TypedChoiceField,
             "apprise_methods": forms.CheckboxSelectMultiple,
         }
         labels = {
             "seen_brands": "I remember seeing ads for the following brands this year",
             "produse_brands": "I remember using products of the following brands this year",
             "pastuse_brands": "I have used these brands at least once in the past",
-            "ad_blocking": "I use ad blocking software",
-            "yt_sub": "Do you use a Youtube subscription?",
-            "youtube_percentage": "Approximately how much percentage of time do you spend on Youtube mobile vs Youtube web?",
             "apprise_methods": "How do you apprise yourself of the latest products and brands?",
             "gpa": "What is your CGPA?",
         }
         for sector in SECTORS:
             for option in range(NUM_BRAND_PRODUCT_OPTIONS):
+
                 fields.append(f"brand_{sector}_{option}")
                 fields.append(f"product_{sector}_{option}")
 
@@ -111,9 +115,7 @@ class SurveyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SurveyForm, self).__init__(*args, **kwargs)
         for name, field in self.fields.items():
-            if not name.startswith("brand_") or name.startswith("product_"):
-                # add class to all field labels
-                pass
+            pass
 
 
 @login_required
