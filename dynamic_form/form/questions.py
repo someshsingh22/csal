@@ -1,7 +1,11 @@
 from django import forms
 from django.db import models
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+import logging
+
+logging.basicConfig(level=logging.INFO, filename="debug.log")
 
 from . intro import Brand
 
@@ -124,7 +128,7 @@ class OverallQuestionSurveyForm(forms.ModelForm):
             "remembered_brands": forms.CheckboxSelectMultiple,
         }
         labels = {
-            "remembered_brands": "Select the brands you remember seeing:",
+            "remembered_brands": "In the eye tracking study, I remember seeing Ads of the following brands:",
         }
 
 def overall_survey(request):
@@ -132,7 +136,7 @@ def overall_survey(request):
         form = OverallQuestionSurveyForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "thankyou.html")
+            return redirect("/form/brand?page=1")
     else:
         exp = Experience.objects.get(user=request.user)
         form = OverallQuestionSurveyForm(initial={"exp": exp})
@@ -144,17 +148,23 @@ def overall_survey(request):
         form.fields["remembered_brands"].queryset = final_brands.order_by("?")
     return render(request, "short_term.html", {"form": form})
 
-ANSWERED = 0
-
 def brand_survey(request):
+    survey = OverallQuestionSurvey.objects.all().filter(exp__user=request.user).last()
+    brands = survey.remembered_brands.all()
+    exp = Experience.objects.get(user=request.user)
+    forms = [RememberedBrandForm(initial={"experience": exp, "brand": brand}) for brand in brands]
+    logging.info(len(forms))
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
         if form.is_valid():
             form.save()
-        return render(request, "thankyou.html")
+            page = request.GET.get("page")
+            next_page = int(page) + 1
+            return redirect('/form/brand?page={}'.format(next_page))
     else:
-        survey = OverallQuestionSurvey.objects.get(exp__user=request.user)
-        brands = survey.remembered_brands.all()
-        exp = Experience.objects.get(user=request.user)
-        forms = [RememberedBrandForm(initial={"experience": exp, "brand": brand}) for brand in brands]
-        return render(request, "brand_survey.html", {"forms": forms})
+        page_number = int(request.GET.get("page"))
+        try:
+            curr_form = forms[page_number-1]
+        except IndexError:
+            return render(request, "thankyou.html")
+    return render(request, "brand_survey.html", {"form": curr_form})

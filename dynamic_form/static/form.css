@@ -29,3 +29,13 @@ input[type="number"], input[type="text"] {
     display: inline-block;
     width: auto;
 }
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #eee;
+}
