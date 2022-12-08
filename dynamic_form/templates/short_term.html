@@ -9,45 +9,175 @@
 </head>
 
 
-<form method="post" novalidate>
+<form method="post">
   {% csrf_token %}
-
   {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}
-
-  {% if form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
+  <div class="form-group">
+    <h3>In the eye tracking study, I remember seeing Ads of the following industries</h3>
+    <div class="form-options">
+      <div class="row">
+        <div class="col-4">
+          {{ form.Clothing_and_Apparel_seen }}{{ form.Clothing_and_Apparel_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Food_and_Beverages_seen }}{{ form.Food_and_Beverages_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Cosmetics_seen }}{{ form.Cosmetics_seen.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          {{ form.Healthcare_and_Pharmaceutical_seen }}{{ form.Healthcare_and_Pharmaceutical_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Finance_and_Banking_seen }}{{ form.Finance_and_Banking_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Automobiles_and_Travel_Industry_seen }}{{ form.Automobiles_and_Travel_Industry_seen.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          {{ form.Software_Industry_seen }}{{ form.Software_Industry_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Electronics_seen }}{{ form.Electronics_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Telecom_seen }}{{ form.Telecom_seen.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          {{ form.Education_seen }}{{ form.Education_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Energy_seen }}{{ form.Energy_seen.label }}
+        </div>
+        <div class="col-4">
+          {{ form.Defence_seen }}{{ form.Defence_seen.label }}
+        </div>
+      </div>
     </div>
-  {% endif %}
-
-  {% for field in form.visible_fields %}
-    <div class="form-group">
-      <h2>{{ field.label_tag }}<br></h2>
-
-      {% if form.is_bound %}
-        {% if field.errors %}
-          {% render_field field class="form-control is-invalid" %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">
-              {{ error }}
-            </div>
-          {% endfor %}
-        {% else %}
-          {% render_field field class="form-control is-valid"%}
-        {% endif %}
-      {% else %}
-        {% render_field field class="form-control" %}
-      {% endif %}
-
-      {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
-      {% endif %}
+  </div>
+  <div class="form-group">
+    <h3>{{ form.remembered_brands.label }}</h3>
+    <div class="form-options">
+      <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.0 }}{{ form.remembered_brands.0.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.1 }}{{ form.remembered_brands.1.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.2 }}{{ form.remembered_brands.2.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.3 }}{{ form.remembered_brands.3.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.4 }}{{ form.remembered_brands.4.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.5 }}{{ form.remembered_brands.5.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.6 }}{{ form.remembered_brands.6.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.7 }}{{ form.remembered_brands.7.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.8 }}{{ form.remembered_brands.8.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.9 }}{{ form.remembered_brands.9.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.10 }}{{ form.remembered_brands.10.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.11 }}{{ form.remembered_brands.11.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.12 }}{{ form.remembered_brands.12.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.13 }}{{ form.remembered_brands.13.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.14 }}{{ form.remembered_brands.14.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.15 }}{{ form.remembered_brands.15.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.16 }}{{ form.remembered_brands.16.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.17 }}{{ form.remembered_brands.17.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.18 }}{{ form.remembered_brands.18.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.19 }}{{ form.remembered_brands.19.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.20 }}{{ form.remembered_brands.20.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.21 }}{{ form.remembered_brands.21.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.22 }}{{ form.remembered_brands.22.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.23 }}{{ form.remembered_brands.23.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.24 }}{{ form.remembered_brands.24.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.25 }}{{ form.remembered_brands.25.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.26 }}{{ form.remembered_brands.26.label }}
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-4">
+          {{ form.remembered_brands.27 }}{{ form.remembered_brands.27.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.28 }}{{ form.remembered_brands.28.label }}
+        </div>
+        <div class="col-4">
+          {{ form.remembered_brands.29 }}{{ form.remembered_brands.29.label }}
+        </div>
+      </div>
+      </div>
     </div>
-  {% endfor %}
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

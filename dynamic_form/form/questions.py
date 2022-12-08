@@ -2,14 +2,15 @@ from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
 import logging
+import json
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
 from .intro import Brand
 
 RECOGNITION_OPTIONS = 30
+SECTORS = json.load(open("data/sectors_prompt.json"))
 
 
 class Video(models.Model):
@@ -63,16 +64,43 @@ class RememberedBrandForm(forms.ModelForm):
     audio = forms.ChoiceField(
         choices=AUDIO_CHOICES,
         widget=forms.RadioSelect,
+        label="For this brand's ad, I remember hearing the following audio types",
     )
 
     usage_brand = forms.ChoiceField(
         choices=FREQUENCY_CHOICES,
         widget=forms.RadioSelect,
+        label="How many times in the last year have you used the product shown in this brand's ad?",
     )
 
     usage_product = forms.ChoiceField(
         choices=FREQUENCY_CHOICES,
         widget=forms.RadioSelect,
+        label="How many times in the last year have you used this brand?",
+    )
+
+    used_brand = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Have you ever used this brand before?",
+    )
+
+    used_product = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Have you ever used the product shown in this brand's ad before?",
+    )
+
+    brand_ads_seen = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Have you ever seen any advertisements from this brand before?",
+    )
+
+    ad_seen = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Have you ever seen this particular advertisement before?",
     )
 
     class Meta:
@@ -106,19 +134,14 @@ class RememberedBrandForm(forms.ModelForm):
             "scenes_description": f"For this brand's ad, I remember seeing the following (Write Scene Descriptions)",
             "emotions": "For this brand's ad, I remember feeling these emotion(s)",
             "seen_objects": "For this brand's ad, I remember seeing the following object(s) (Comma Separated)",
-            "audio": "For this brand's ad, I remember hearing the following audio types",
             "caption": "Single line caption I would like to give to the ad, i.e I should buy this brand because",
-            "used_brand": "Have you ever used this brand before?",
-            "used_product": "Have you ever used the product shown in this brand's ad before?",
-            "usage_brand": "How many times in the last year have you used the product shown in this brand's ad?",
-            "usage_product": "How many times in the last year have you used this brand?",
-            "brand_ads_seen": "Have you ever seen any advertisements from this brand before?",
-            "ad_seen": "Have you ever seen this particular advertisement before?",
         }
 
 
 class OverallQuestionSurvey(models.Model):
     exp = models.ForeignKey(Experience, on_delete=models.CASCADE)
+    for sector in SECTORS:
+        locals()[f"{sector}_seen"] = models.BooleanField()
     remembered_brands = models.ManyToManyField(Brand)
 
 
@@ -131,8 +154,12 @@ class OverallQuestionSurveyForm(forms.ModelForm):
             "remembered_brands": forms.CheckboxSelectMultiple,
         }
         labels = {
-            "remembered_brands": "In the eye tracking study, I remember seeing Ads of the following brands:",
+            "remembered_brands": "In the eye tracking study, I remember seeing Ads of the following brands",
         }
+        for sector in SECTORS:
+            fields.append(f"{sector}_seen")
+            widgets[f"{sector}_seen"] = forms.CheckboxInput
+            labels[f"{sector}_seen"] = sector.replace("_", " ")
 
 
 def overall_survey(request):
@@ -173,8 +200,6 @@ def brand_survey(request):
             return redirect("/form/brand?page={}".format(next_page))
     else:
         page_number = int(request.GET.get("page"))
-        try:
-            curr_form = forms[page_number - 1]
-        except IndexError:
-            return render(request, "thankyou.html")
-    return render(request, "brand_survey.html", {"form": curr_form})
+        brand = brands[page_number - 1].name
+        curr_form = forms[page_number - 1]
+        return render(request, "brand_survey.html", {"form": curr_form, "brand": brand})

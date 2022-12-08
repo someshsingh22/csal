@@ -187,3 +187,76 @@ INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+INFO:root:4
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 209, in brand_survey
+    return render(request, "brand_survey.html", {"form": curr_form, "brand": brand})
+UnboundLocalError: local variable 'curr_form' referenced before assignment
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 206, in brand_survey
+    return render(request, "brand_survey.html", {"form": curr_form, "brand": brand})
+UnboundLocalError: local variable 'curr_form' referenced before assignment
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:4
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view form.questions.brand_survey didn't return an HttpResponse object. It returned None instead.
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
