@@ -48,6 +48,21 @@ class Survey(models.Model):
             )
 
 
+class SeenBrands(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    seen_brands = models.ManyToManyField(Brand)
+
+
+class ProdUseBrands(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    produse_brands = models.ManyToManyField(Brand)
+
+
+class PastUseBrands(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pastuse_brands = models.ManyToManyField(Brand)
+
+
 class SurveyForm(forms.ModelForm):
     YOUTUBE_PERCENTAGE_CHOICES = [
         (1, "<10% on mobile"),
@@ -125,10 +140,10 @@ def intro_survey(request):
             return render(request, "thankyou.html")
     else:
         form = SurveyForm(initial={"user": request.user})
-        sampling = ["seen_brands", "produse_brands", "pastuse_brands"]
-        randoms = Brand.objects.order_by("?")[: NUM_OPTIONS * len(sampling)]
-        for i, field in enumerate(sampling):
-            form.fields[field].queryset = randoms[
-                i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
-            ]
+        seen_brands = SeenBrands.objects.filter(user=request.user)
+        produse_brands = ProdUseBrands.objects.filter(user=request.user)
+        pastuse_brands = PastUseBrands.objects.filter(user=request.user)
+        form.fields["seen_brands"].queryset = seen_brands
+        form.fields["produse_brands"].queryset = produse_brands
+        form.fields["pastuse_brands"].queryset = pastuse_brands
     return render(request, "introduction.html", {"form": form})

@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.db import models
 from django.contrib.auth.models import User
@@ -10,6 +12,7 @@ logging.basicConfig(level=logging.INFO, filename="debug.log")
 from .intro import Brand
 
 RECOGNITION_OPTIONS = 30
+SECTORS = json.load(open("data/sectors.json"))
 
 
 class Video(models.Model):
@@ -28,6 +31,11 @@ class Emotions(models.Model):
 
     def __str__(self):
         return self.emotion
+
+
+class BrandOptions(models.Model):
+    exp = models.ForeignKey(Experience, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(Brand)
 
 
 class RememberedBrand(models.Model):
@@ -120,6 +128,8 @@ class RememberedBrandForm(forms.ModelForm):
 class OverallQuestionSurvey(models.Model):
     exp = models.ForeignKey(Experience, on_delete=models.CASCADE)
     remembered_brands = models.ManyToManyField(Brand)
+    for sector in SECTORS:
+        locals()[f"{sector}_seen"] = models.BooleanField()
 
 
 class OverallQuestionSurveyForm(forms.ModelForm):
@@ -133,6 +143,10 @@ class OverallQuestionSurveyForm(forms.ModelForm):
         labels = {
             "remembered_brands": "In the eye tracking study, I remember seeing Ads of the following brands:",
         }
+        for sector in SECTORS:
+            fields.append(f"{sector}_seen")
+            widgets[f"{sector}_seen"] = forms.CheckboxInput
+            labels[f"{sector}_seen"] = sector
 
 
 def overall_survey(request):
