@@ -60,8 +60,13 @@ class SurveyForm(forms.ModelForm):
         widget=forms.RadioSelect,
     )
 
-    ad_blocking = forms.TypedChoiceField(coerce=lambda x: x =='True', choices=((False, 'No'), (True, 'Yes')))
-    yt_sub = forms.TypedChoiceField(coerce=lambda x: x =='True', choices=((False, 'No'), (True, 'Yes')))
+    ad_blocking = forms.TypedChoiceField(
+        coerce=lambda x: x == "True", choices=((False, "No"), (True, "Yes"))
+    )
+    yt_sub = forms.TypedChoiceField(
+        coerce=lambda x: x == "True", choices=((False, "No"), (True, "Yes"))
+    )
+
     class Meta:
         model = Survey
         fields = [
@@ -109,6 +114,7 @@ class SurveyForm(forms.ModelForm):
             if not name.startswith("brand_") or name.startswith("product_"):
                 # add class to all field labels
                 pass
+
 
 @login_required
 def intro_survey(request):

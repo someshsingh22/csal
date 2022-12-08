@@ -1,6 +1,6 @@
 from django.urls import path, include
-from . intro import intro_survey
-from . questions import overall_survey, brand_survey
+from .intro import intro_survey
+from .questions import overall_survey, brand_survey
 
 urlpatterns = [
     path("", intro_survey, name="intro_survey"),

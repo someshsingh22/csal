@@ -7,9 +7,10 @@ import logging
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
-from . intro import Brand
+from .intro import Brand
 
 RECOGNITION_OPTIONS = 30
+
 
 class Video(models.Model):
     url = models.CharField(max_length=255)
@@ -21,11 +22,13 @@ class Experience(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     videos = models.ManyToManyField(Video)
 
+
 class Emotions(models.Model):
     emotion = models.CharField(max_length=255)
 
     def __str__(self):
         return self.emotion
+
 
 class RememberedBrand(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
@@ -131,6 +134,7 @@ class OverallQuestionSurveyForm(forms.ModelForm):
             "remembered_brands": "In the eye tracking study, I remember seeing Ads of the following brands:",
         }
 
+
 def overall_survey(request):
     if request.method == "POST":
         form = OverallQuestionSurveyForm(request.POST)
@@ -144,15 +148,21 @@ def overall_survey(request):
         brands_seen = Brand.objects.filter(video__in=videos_seen)
         num_seen_brands = brands_seen.count()
         remaining_brands = Brand.objects.exclude(id__in=brands_seen).order_by("?")
-        final_brands = brands_seen | remaining_brands[:RECOGNITION_OPTIONS - num_seen_brands]
+        final_brands = (
+            brands_seen | remaining_brands[: RECOGNITION_OPTIONS - num_seen_brands]
+        )
         form.fields["remembered_brands"].queryset = final_brands.order_by("?")
     return render(request, "short_term.html", {"form": form})
+
 
 def brand_survey(request):
     survey = OverallQuestionSurvey.objects.all().filter(exp__user=request.user).last()
     brands = survey.remembered_brands.all()
     exp = Experience.objects.get(user=request.user)
-    forms = [RememberedBrandForm(initial={"experience": exp, "brand": brand}) for brand in brands]
+    forms = [
+        RememberedBrandForm(initial={"experience": exp, "brand": brand})
+        for brand in brands
+    ]
     logging.info(len(forms))
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
@@ -160,11 +170,11 @@ def brand_survey(request):
             form.save()
             page = request.GET.get("page")
             next_page = int(page) + 1
-            return redirect('/form/brand?page={}'.format(next_page))
+            return redirect("/form/brand?page={}".format(next_page))
     else:
         page_number = int(request.GET.get("page"))
         try:
-            curr_form = forms[page_number-1]
+            curr_form = forms[page_number - 1]
         except IndexError:
             return render(request, "thankyou.html")
     return render(request, "brand_survey.html", {"form": curr_form})

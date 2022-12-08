@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     "http://someshs.pythonanywhere.com/",
     "https://someshs.pythonanywhere.com/",
     "someshs.pythonanywhere.com",
-    "127.0.0.1"
+    "127.0.0.1",
 ]
 
 
