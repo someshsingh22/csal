@@ -6,9 +6,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+import logging
+
+logging.basicConfig(level=logging.INFO, filename="log.txt")
 
 SECTORS = json.load(open("data/sectors.json"))
-NUM_BRAND_PRODUCT_OPTIONS = 3
 NUM_OPTIONS = 15
 
 
@@ -39,13 +41,9 @@ class Survey(models.Model):
         validators=[MinValueValidator(4.0), MaxValueValidator(10.0)]
     )
     for sector in SECTORS:
-        for option in range(NUM_BRAND_PRODUCT_OPTIONS):
-            locals()[f"brand_{sector}_{option}"] = models.CharField(
-                max_length=255, blank=True, default=""
-            )
-            locals()[f"product_{sector}_{option}"] = models.CharField(
-                max_length=255, blank=False, null=False
-            )
+        locals()[f"brand_{sector}"] = models.CharField(
+            max_length=255, blank=True, default=""
+        )
 
 
 class SurveyForm(forms.ModelForm):
@@ -64,7 +62,7 @@ class SurveyForm(forms.ModelForm):
     ad_blocking = forms.TypedChoiceField(
         coerce=lambda x: x == "True",
         choices=((False, "No"), (True, "Yes")),
-        label="I use ad blocking software",
+        label="Do you use an ad blocking software?",
     )
     yt_sub = forms.TypedChoiceField(
         coerce=lambda x: x == "True",
@@ -101,16 +99,9 @@ class SurveyForm(forms.ModelForm):
             "gpa": "What is your CGPA?",
         }
         for sector in SECTORS:
-            for option in range(NUM_BRAND_PRODUCT_OPTIONS):
-
-                fields.append(f"brand_{sector}_{option}")
-                fields.append(f"product_{sector}_{option}")
-
-                labels[f"brand_{sector}_{option}"] = "Brand"
-                labels[f"product_{sector}_{option}"] = "Product"
-
-                widgets[f"brand_{sector}_{option}"] = forms.TextInput()
-                widgets[f"product_{sector}_{option}"] = forms.TextInput()
+            fields.append(f"brand_{sector}")
+            labels[f"brand_{sector}"] = sector
+            widgets[f"brand_{sector}"] = forms.TextInput()
 
     def __init__(self, *args, **kwargs):
         super(SurveyForm, self).__init__(*args, **kwargs)

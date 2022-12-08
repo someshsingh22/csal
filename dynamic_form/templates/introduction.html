@@ -8,46 +8,252 @@
     <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
 
-
-<form method="post" novalidate>
+<form method="post">
   {% csrf_token %}
   {% for hidden_field in form.hidden_fields %}
     {{ hidden_field }}
   {% endfor %}
 
-  {% if form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
-    </div>
+  {% if form.seen_brands.help_text %}
+  <small style="color: grey">{{ form.seen_brands.help_text }}</small>
   {% endif %}
-
-  {% for field in form.visible_fields %}
-    <div class="form-group">
-      <h3>{{ field.label_tag }}<br></h2>
-      
-      {% if form.is_bound %}
-        {% if field.errors %}
-          {% render_field field class="form-control is-invalid" %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">
-              {{ error }}
-            </div>
-          {% endfor %}
-        {% else %}
-          {% render_field field class="form-control is-valid"%}
-        {% endif %}
-      {% else %}
-        {% render_field field class="form-control" %}
-      {% endif %}
-
-      {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
-      {% endif %}
+  <div class="form-group">
+  <h3>{{ form.seen_brands.label }}</h3>
+  <div class="form-options">
+  <div class="row">
+    <div class="col-4">
+      {{ form.seen_brands.0 }}{{ form.seen_brands.0.label }}
     </div>
-    {% if field.name == "gpa" %}<h3>For the following sectors, name top-5 brands and their products that you have used in the past or are currently using: (Name the product even if you don’t know the brand which produced it)</h3>{% endif %}
-  {% endfor %}
+    <div class="col-4">
+      {{ form.seen_brands.1 }}{{ form.seen_brands.1.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.2 }}{{ form.seen_brands.2.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.seen_brands.3 }}{{ form.seen_brands.3.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.4 }}{{ form.seen_brands.4.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.5 }}{{ form.seen_brands.5.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.seen_brands.6 }}{{ form.seen_brands.6.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.7 }}{{ form.seen_brands.7.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.8 }}{{ form.seen_brands.8.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.seen_brands.9 }}{{ form.seen_brands.9.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.10 }}{{ form.seen_brands.10.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.11 }}{{ form.seen_brands.11.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.seen_brands.12 }}{{ form.seen_brands.12.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.13 }}{{ form.seen_brands.13.label }}
+    </div>
+    <div class="col-4">
+      {{ form.seen_brands.14 }}{{ form.seen_brands.14.label }}
+    </div>
+    </div>
+  </div>
+  </div>
 
+  {% if form.produse_brands.help_text %}
+  <small style="color: grey">{{ form.produse_brands.help_text }}</small>
+  {% endif %}
+  <div class="form-group">
+  <h3>{{ form.produse_brands.label }}</h3>
+  <div class="form-options">
+  <div class="row">
+    <div class="col-4">
+      {{ form.produse_brands.0 }}{{ form.produse_brands.0.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.1 }}{{ form.produse_brands.1.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.2 }}{{ form.produse_brands.2.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.produse_brands.3 }}{{ form.produse_brands.3.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.4 }}{{ form.produse_brands.4.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.5 }}{{ form.produse_brands.5.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.produse_brands.6 }}{{ form.produse_brands.6.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.7 }}{{ form.produse_brands.7.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.8 }}{{ form.produse_brands.8.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.produse_brands.9 }}{{ form.produse_brands.9.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.10 }}{{ form.produse_brands.10.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.11 }}{{ form.produse_brands.11.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.produse_brands.12 }}{{ form.produse_brands.12.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.13 }}{{ form.produse_brands.13.label }}
+    </div>
+    <div class="col-4">
+      {{ form.produse_brands.14 }}{{ form.produse_brands.14.label }}
+    </div>
+    </div>
+  </div>
+  </div>
+
+  {% if form.pastuse_brands.help_text %}
+  <small style="color: grey">{{ form.pastuse_brands.help_text }}</small>
+  {% endif %}
+  <div class="form-group">
+  <h3>{{ form.pastuse_brands.label }}</h3>
+  <div class="form-options">
+  <div class="row">
+    <div class="col-4">
+      {{ form.pastuse_brands.0 }}{{ form.pastuse_brands.0.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.1 }}{{ form.pastuse_brands.1.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.2 }}{{ form.pastuse_brands.2.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.pastuse_brands.3 }}{{ form.pastuse_brands.3.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.4 }}{{ form.pastuse_brands.4.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.5 }}{{ form.pastuse_brands.5.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.pastuse_brands.6 }}{{ form.pastuse_brands.6.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.7 }}{{ form.pastuse_brands.7.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.8 }}{{ form.pastuse_brands.8.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.pastuse_brands.9 }}{{ form.pastuse_brands.9.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.10 }}{{ form.pastuse_brands.10.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.11 }}{{ form.pastuse_brands.11.label }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      {{ form.pastuse_brands.12 }}{{ form.pastuse_brands.12.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.13 }}{{ form.pastuse_brands.13.label }}
+    </div>
+    <div class="col-4">
+      {{ form.pastuse_brands.14 }}{{ form.pastuse_brands.14.label }}
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="form-group" style="margin-top: 2em; margin-bottom: 2em;">
+  <h3>{{ form.ad_blocking.label }}</h3>
+    {{ form.ad_blocking }}
+  </div>
+  <div class="form-group" style="margin-top: 2em; margin-bottom: 2em;">
+    <h3>{{ form.yt_sub.label }}</h3>
+      {{ form.yt_sub }}
+  </div>
+  <div class="form-group">
+    <h3>{{ form.youtube_percentage.label }}</h3>
+    <div class="form-options">
+      {{ form.youtube_percentage }}
+    </div>
+  </div>
+  <div class="form-group">
+    <h3>{{ form.apprise_methods.label }}</h3>
+    <div class="form-options">
+      {{ form.apprise_methods }}
+    </div>
+  </div>
+  <div class="form-group">
+    <h3>{{ form.gpa.label }}</h3>
+      {{ form.gpa }}
+  </div>
+  <div class="form-group">
+    <h3>For the following sectors, name 5 brands <i>(comma separated)</i> and/or their products that you have used in the past or are currently using</h3>
+    <p>For example, <b>Tech</b>: Adobe Photoshop,Amazon,Microsoft Windows, Google, Twitter<br>Name the product even if you don't know the brand which produced it.</p>
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Automobiles.label }}</h5>
+      {{ form.brand_Automobiles }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Clothing_and_Apparel.label }}</h5>
+      {{ form.brand_Clothing_and_Apparel }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Cosmetics.label }}</h5>
+      {{ form.brand_Cosmetics }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Electronics.label }}</h5>
+      {{ form.brand_Electronics }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Telecom.label }}</h5>
+      {{ form.brand_Telecom }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Healthcare.label }}</h5>
+      {{ form.brand_Healthcare }}
+
+    <h5 style="margin-top: auto; margin-bottom: auto; padding-top: 5px; padding-bottom: 0.5em;">{{ form.brand_Food.label }}</h5>
+      {{ form.brand_Food }}
+
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
