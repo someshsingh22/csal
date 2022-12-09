@@ -901,3 +901,63 @@ Traceback (most recent call last):
 AttributeError: 'QuerySet' object has no attribute 'queryset'
 INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/intro.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:<ul class="errorlist"><li>user<ul class="errorlist"><li>Survey with this User already exists.</li></ul></li></ul>
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/intro.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:<ul class="errorlist"><li>user<ul class="errorlist"><li>Survey with this User already exists.</li></ul></li></ul>
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/intro.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view form.questions.brand_survey didn't return an HttpResponse object. It returned None instead.
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view form.questions.brand_survey didn't return an HttpResponse object. It returned None instead.
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 233, in brand_survey
+    {"form": form, "brand": brands[int(page) - 1].name},
+UnboundLocalError: local variable 'page' referenced before assignment
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 233, in brand_survey
+    {"form": form, "brand": brands[int(page) - 1].name},
+UnboundLocalError: local variable 'page' referenced before assignment
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>
+INFO:root:<ul class="errorlist"><li>user<ul class="errorlist"><li>Survey with this User already exists.</li></ul></li></ul>
+INFO:root:<ul class="errorlist"><li>user<ul class="errorlist"><li>Survey with this User already exists.</li></ul></li></ul>
+INFO:root:<ul class="errorlist"><li>user<ul class="errorlist"><li>Survey with this User already exists.</li></ul></li></ul>
+ERROR:root:<ul class="errorlist"><li>emotions<ul class="errorlist"><li>This field is required.</li></ul></li><li>seen_objects<ul class="errorlist"><li>This field is required.</li></ul></li></ul>

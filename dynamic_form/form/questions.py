@@ -225,6 +225,12 @@ def brand_survey(request):
             page = request.GET.get("page")
             next_page = int(page) + 1
             return redirect("/form/brand?page={}".format(next_page))
+        else:
+            logging.error(form.errors)
+            return render(
+                request,
+                "error.html",
+            )
     else:
         page_number = int(request.GET.get("page"))
         brand = brands[page_number - 1].name

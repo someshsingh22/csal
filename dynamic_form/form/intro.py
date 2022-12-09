@@ -111,6 +111,7 @@ def intro_survey(request):
             form.save()
             return render(request, "thankyou.html")
         else:
+            logging.log(logging.INFO, form.errors)
             return render(request, "introduction.html", {"form": form})
 
     else:
