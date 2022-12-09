@@ -861,3 +861,43 @@ INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
 INFO:root:somesh
 INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7ff083c2da60>, 'video': <django.forms.models.ModelChoiceField object at 0x7ff083c2d8e0>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7ff08400a160>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7ff084014e20>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7ff08598f970>}
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+INFO:root:somesh
+INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7f7c7db7ca30>, 'video': <django.forms.models.ModelChoiceField object at 0x7f7c7db71ca0>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7f7c7db57700>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7f7c7db88b80>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7f7c7db885b0>}
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/hidden_user/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 70, in hidden_user
+    form.fields["user"].choices.append((user.id, user.email))
+AttributeError: 'ModelChoiceIterator' object has no attribute 'append'
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/hidden_user/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 69, in hidden_user
+    form.fields["user"].queryset = users.queryset.order_by("email")
+AttributeError: 'QuerySet' object has no attribute 'queryset'
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader

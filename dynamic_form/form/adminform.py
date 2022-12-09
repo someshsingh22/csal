@@ -7,6 +7,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
+
 class HiddenSurvey(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
@@ -64,6 +65,9 @@ def hidden_user(request):
 
     else:
         form = SelectUserForm()
+        users = User.objects.all().exclude(username="someshs")
+        form.fields["user"].queryset = users.order_by("email")
+        form.fields["user"].label_from_instance = lambda obj: obj.email
         return render(request, "hidden_user.html", {"form": form})
 
 
@@ -74,9 +78,6 @@ def hidden_survey(request):
     if request.method == "POST":
         form = HiddenSurveyForm(request.POST)
         if form.is_valid():
-            logging.log(logging.INFO, form.cleaned_data)
-            logging.log(logging.INFO, form.cleaned_data["user"])
-            logging.log(logging.INFO, form.fields)
             form.save()
             return redirect("/admin")
         else:
