@@ -235,4 +235,8 @@ def brand_survey(request):
         page_number = int(request.GET.get("page"))
         brand = brands[page_number - 1].name
         curr_form = forms[page_number - 1]
+        for field in curr_form.fields:
+            curr_form.fields[field].label = curr_form.fields[field].label.replace(
+                "this brand", brand
+            )
         return render(request, "brand_survey.html", {"form": curr_form, "brand": brand})

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from .intro import Brand, AppriseMethod, UserPastuse, UserProduse, UserSeen
+from .intro import Brand, AppriseMethod, UserProduse, UserSeen
 from .questions import Video, Experience, Emotions, BrandOptions
 
 
@@ -13,11 +13,6 @@ class BrandResource(resources.ModelResource):
 class AppriseMethodResource(resources.ModelResource):
     class Meta:
         model = AppriseMethod
-
-
-class UserPastuseResource(resources.ModelResource):
-    class Meta:
-        model = UserPastuse
 
 
 class UserProduseResource(resources.ModelResource):
@@ -58,10 +53,6 @@ class AppriseMethodAdmin(ImportExportModelAdmin):
     resource_class = AppriseMethodResource
 
 
-class UserPastuseAdmin(ImportExportModelAdmin):
-    resource_class = UserPastuseResource
-
-
 class UserProduseAdmin(ImportExportModelAdmin):
     resource_class = UserProduseResource
 
@@ -90,7 +81,6 @@ for model_name, admin_name in zip(
     [
         Brand,
         AppriseMethod,
-        UserPastuse,
         UserProduse,
         UserSeen,
         Video,
@@ -101,7 +91,6 @@ for model_name, admin_name in zip(
     [
         BrandAdmin,
         AppriseMethodAdmin,
-        UserPastuseAdmin,
         UserProduseAdmin,
         UserSeenAdmin,
         VideoAdmin,

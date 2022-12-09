@@ -35,16 +35,10 @@ class UserProduse(models.Model):
     brands = models.ManyToManyField(Brand)
 
 
-class UserPastuse(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    brands = models.ManyToManyField(Brand)
-
-
 class Survey(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     seen_brands = models.ManyToManyField(Brand, related_name="seen")
     produse_brands = models.ManyToManyField(Brand, related_name="produse")
-    pastuse_brands = models.ManyToManyField(Brand, related_name="pastuse")
     ad_blocking = models.BooleanField()
     yt_sub = models.BooleanField()
     youtube_percentage = models.IntegerField()
@@ -81,7 +75,6 @@ class SurveyForm(forms.ModelForm):
             "user",
             "seen_brands",
             "produse_brands",
-            "pastuse_brands",
             "ad_blocking",
             "yt_sub",
             "youtube_percentage",
@@ -91,14 +84,12 @@ class SurveyForm(forms.ModelForm):
             "user": forms.HiddenInput,
             "seen_brands": forms.CheckboxSelectMultiple,
             "produse_brands": forms.CheckboxSelectMultiple,
-            "pastuse_brands": forms.CheckboxSelectMultiple,
             "ad_blocking": forms.TypedChoiceField,
             "apprise_methods": forms.CheckboxSelectMultiple,
         }
         labels = {
             "seen_brands": "I remember seeing ads for the following brands this year",
             "produse_brands": "I remember using products of the following brands this year",
-            "pastuse_brands": "I have used these brands at least once in the past",
             "apprise_methods": "How do you apprise yourself of the latest products and brands?",
         }
 
