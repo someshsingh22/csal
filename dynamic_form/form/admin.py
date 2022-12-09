@@ -1,8 +1,6 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-import tablib, json
-
 from .intro import Brand, AppriseMethod
 from .questions import Video, Experience, Emotions
 
@@ -52,18 +50,8 @@ class EmotionsAdmin(ImportExportModelAdmin):
     resource_class = EmotionsResource
 
 
-for model_name, admin_name, resource, file_name in zip(
+for model_name, admin_name in zip(
     [Brand, AppriseMethod, Video, Experience, Emotions],
     [BrandAdmin, AppriseMethodAdmin, VideoAdmin, ExperienceAdmin, EmotionsAdmin],
-    [
-        BrandResource,
-        AppriseMethodResource,
-        VideoResource,
-        ExperienceResource,
-        EmotionsResource,
-    ],
-    ["brands", "apprise_method", "video", "experience", "emotions"],
 ):
     admin.site.register(model_name, admin_name)
-    dataset = tablib.Dataset().load(open(f"data/{file_name}.json"), format="json")
-    resource().import_data(dataset, dry_run=False)

@@ -6,7 +6,8 @@ from .questions import Video, Experience
 
 
 class HiddenSurvey(models.Model):
-    video = models.ManyToManyField(Video)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
     ad_seen = models.BooleanField()
     brand_ads_seen = models.BooleanField()
     brand_heard = models.BooleanField()
@@ -41,6 +42,7 @@ class HiddenSurveyForm(forms.ModelForm):
         model = HiddenSurvey
         fields = ["video", "ad_seen", "brand_ads_seen", "brand_heard"]
         widgets = {
+            "user": forms.HiddenInput,
             "ad_seen": forms.TypedChoiceField,
             "brand_ads_seen": forms.TypedChoiceField,
             "brand_heard": forms.TypedChoiceField,
@@ -76,12 +78,9 @@ def hidden_survey(request):
             return render(request, "error.html")
 
     else:
-        try:
-            user_id = request.GET.get("user")
-        except:
-            return render(request, "error.html")
+        user_id = request.GET.get("user")
         user = User.objects.get(id=user_id)
-        user_videos = Experience.objects.get(user=user_id).videos.all()
+        user_videos = Experience.objects.get(user=user).videos.all()
         form = HiddenSurveyForm(initial={"user": user})
         form.fields["video"].queryset = user_videos
         return render(request, "hidden_survey.html", {"form": form})

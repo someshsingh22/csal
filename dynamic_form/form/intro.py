@@ -8,9 +8,7 @@ from django.contrib.auth.decorators import login_required
 import logging
 
 logging.basicConfig(level=logging.INFO, filename="log.txt")
-
 SECTORS = json.load(open("data/sectors.json"))
-NUM_OPTIONS = 15
 
 
 class Brand(models.Model):
@@ -25,6 +23,21 @@ class AppriseMethod(models.Model):
 
     def __str__(self):
         return self.method
+
+
+class UserSeen(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(Brand)
+
+
+class UserProduse(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(Brand)
+
+
+class UserPastuse(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(Brand)
 
 
 class Survey(models.Model):
@@ -102,10 +115,13 @@ def intro_survey(request):
 
     else:
         form = SurveyForm(initial={"user": request.user})
-        sampling = ["seen_brands", "produse_brands", "pastuse_brands"]
-        randoms = Brand.objects.order_by("?")[: NUM_OPTIONS * len(sampling)]
-        for i, field in enumerate(sampling):
-            form.fields[field].queryset = randoms[
-                i * NUM_OPTIONS : (i + 1) * NUM_OPTIONS
-            ]
+        form.fields["seen_brands"].queryset = UserSeen.objects.get(
+            user=request.user
+        ).brands.all()
+        form.fields["produse_brands"].queryset = UserProduse.objects.get(
+            user=request.user
+        ).brands.all()
+        form.fields["pastuse_brands"].queryset = UserPastuse.objects.get(
+            user=request.user
+        ).brands.all()
     return render(request, "introduction.html", {"form": form})
