@@ -11,6 +11,16 @@ logging.basicConfig(level=logging.INFO, filename="log.txt")
 SECTORS = json.load(open("data/sectors.json"))
 
 
+def newstr(self):
+    try:
+        return self.name + " - " + self.email
+    except:
+        return User.__str__()
+
+
+User.__str__ = newstr
+
+
 class Brand(models.Model):
     name = models.CharField(max_length=255)
 

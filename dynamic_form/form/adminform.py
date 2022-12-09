@@ -7,6 +7,17 @@ import logging
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
+
+def newstr(self):
+    try:
+        return self.name + " - " + self.email
+    except:
+        return User.__str__()
+
+
+User.__str__ = newstr
+
+
 class HiddenSurvey(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
@@ -20,6 +31,8 @@ class SelectUserForm(forms.Form):
 
 
 class HiddenSurveyForm(forms.ModelForm):
+    user = forms.HiddenInput()
+
     video = forms.ModelChoiceField(
         queryset=Video.objects.all(), label="Select the video"
     )
@@ -44,7 +57,6 @@ class HiddenSurveyForm(forms.ModelForm):
         model = HiddenSurvey
         fields = ["user", "video", "ad_seen", "brand_ads_seen", "brand_heard"]
         widgets = {
-            "user": forms.HiddenInput,
             "ad_seen": forms.TypedChoiceField,
             "brand_ads_seen": forms.TypedChoiceField,
             "brand_heard": forms.TypedChoiceField,

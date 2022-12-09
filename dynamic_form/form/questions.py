@@ -12,6 +12,16 @@ from .intro import Brand
 SECTORS = json.load(open("data/sectors_prompt.json"))
 
 
+def newstr(self):
+    try:
+        return self.name + " - " + self.email
+    except:
+        return User.__str__()
+
+
+User.__str__ = newstr
+
+
 class Video(models.Model):
     path = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
