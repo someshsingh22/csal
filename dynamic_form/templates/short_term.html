@@ -1,21 +1,14 @@
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    {% load static %}
-    {% load widget_tweaks %}
-    <link rel="stylesheet" href="{% static 'form.css' %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> {% load static %} {% load widget_tweaks %}
+  <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
-
-
-<form method="post">
-  {% csrf_token %}
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field }}
-  {% endfor %}
-  <div class="form-group">
-    <h3>In the eye tracking study, I remember seeing Ads of the following industries<span style="color: red"><sup>*</sup></h3></span>
+<form method="post"> {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field }} {% endfor %} <div class="form-group">
+    <h3>In the eye tracking study, I remember seeing Ads of the following industries <span style="color: red">
+        <sup>*</sup>
+    </h3>
+    </span>
     <div class="form-options">
       <div class="row">
         <div class="col-4">
@@ -62,9 +55,19 @@
         </div>
       </div>
     </div>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      Select at least one industry!
+    </div>
+    {% endif %}
+
   </div>
   <div class="form-group">
-    <h3>{{ form.remembered_brands.label }}<span style="color: red"><sup>*</sup></h3></span>
+    <h3>{{ form.remembered_brands.label }}
+      <span style="color: red">
+        <sup>*</sup>
+    </h3>
+    </span>
     <div class="form-options">
       <div class="row">
         <div class="col-4">
@@ -77,7 +80,7 @@
           {{ form.remembered_brands.2 }}{{ form.remembered_brands.2.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.3 }}{{ form.remembered_brands.3.label }}
         </div>
@@ -88,7 +91,7 @@
           {{ form.remembered_brands.5 }}{{ form.remembered_brands.5.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.6 }}{{ form.remembered_brands.6.label }}
         </div>
@@ -99,7 +102,7 @@
           {{ form.remembered_brands.8 }}{{ form.remembered_brands.8.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.9 }}{{ form.remembered_brands.9.label }}
         </div>
@@ -110,7 +113,7 @@
           {{ form.remembered_brands.11 }}{{ form.remembered_brands.11.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.12 }}{{ form.remembered_brands.12.label }}
         </div>
@@ -121,7 +124,7 @@
           {{ form.remembered_brands.14 }}{{ form.remembered_brands.14.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.15 }}{{ form.remembered_brands.15.label }}
         </div>
@@ -132,7 +135,7 @@
           {{ form.remembered_brands.17 }}{{ form.remembered_brands.17.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.18 }}{{ form.remembered_brands.18.label }}
         </div>
@@ -143,7 +146,7 @@
           {{ form.remembered_brands.20 }}{{ form.remembered_brands.20.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.21 }}{{ form.remembered_brands.21.label }}
         </div>
@@ -154,7 +157,7 @@
           {{ form.remembered_brands.23 }}{{ form.remembered_brands.23.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.24 }}{{ form.remembered_brands.24.label }}
         </div>
@@ -165,7 +168,7 @@
           {{ form.remembered_brands.26 }}{{ form.remembered_brands.26.label }}
         </div>
       </div>
-    <div class="row">
+      <div class="row">
         <div class="col-4">
           {{ form.remembered_brands.27 }}{{ form.remembered_brands.27.label }}
         </div>
@@ -176,8 +179,8 @@
           {{ form.remembered_brands.29 }}{{ form.remembered_brands.29.label }}
         </div>
       </div>
-      </div>
     </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+  </div> {% for error in form.remembered_brands.errors %} <div class="alert alert-danger" role="alert">
+    {{ error }}
+  </div> {% endfor %} <button type="submit" class="btn btn-primary">Submit</button>
 </form>

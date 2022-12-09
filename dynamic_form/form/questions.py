@@ -18,6 +18,9 @@ class Video(models.Model):
     name = models.CharField(max_length=255)
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name + " - " + self.brand.name + " - " + self.url
+
 
 class Experience(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -162,24 +165,46 @@ class OverallQuestionSurveyForm(forms.ModelForm):
             labels[f"{sector}_seen"] = sector.replace("_", " ")
 
 
+def get_form(request):
+    exp = Experience.objects.get(user=request.user)
+    form = OverallQuestionSurveyForm(initial={"exp": exp})
+    videos_seen = exp.videos.all()
+    brands_seen = Brand.objects.filter(video__in=videos_seen)
+    num_seen_brands = brands_seen.count()
+    remaining_brands = Brand.objects.exclude(id__in=brands_seen).order_by("?")
+    final_brands = (
+        brands_seen | remaining_brands[: RECOGNITION_OPTIONS - num_seen_brands]
+    )
+    form.fields["remembered_brands"].queryset = final_brands.order_by("?")
+    return form
+
+
 def overall_survey(request):
     if request.method == "POST":
         form = OverallQuestionSurveyForm(request.POST)
-        if form.is_valid():
+        if (
+            form.is_valid()
+            and sum([form.cleaned_data[f"{sector}_seen"] for sector in SECTORS]) > 0
+        ):
             form.save()
             return redirect("/form/brand?page=1")
+        else:
+            if sum([form.cleaned_data[f"{sector}_seen"] for sector in SECTORS]) == 0:
+                return render(
+                    request,
+                    "short_term.html",
+                    {"form": get_form(request), "error": True},
+                )
+            else:
+                return render(
+                    request,
+                    "short_term.html",
+                    {"form": get_form(request), "error": False},
+                )
     else:
-        exp = Experience.objects.get(user=request.user)
-        form = OverallQuestionSurveyForm(initial={"exp": exp})
-        videos_seen = exp.videos.all()
-        brands_seen = Brand.objects.filter(video__in=videos_seen)
-        num_seen_brands = brands_seen.count()
-        remaining_brands = Brand.objects.exclude(id__in=brands_seen).order_by("?")
-        final_brands = (
-            brands_seen | remaining_brands[: RECOGNITION_OPTIONS - num_seen_brands]
+        return render(
+            request, "short_term.html", {"form": get_form(request), "error": False}
         )
-        form.fields["remembered_brands"].queryset = final_brands.order_by("?")
-    return render(request, "short_term.html", {"form": form})
 
 
 def brand_survey(request):
@@ -190,7 +215,8 @@ def brand_survey(request):
         RememberedBrandForm(initial={"experience": exp, "brand": brand})
         for brand in brands
     ]
-    logging.info(len(forms))
+    if not request.GET.get("page"):
+        return redirect("/form/brand?page=1")
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
         if form.is_valid():

@@ -98,8 +98,8 @@ def intro_survey(request):
             form.save()
             return render(request, "thankyou.html")
         else:
-            logging.info(form.errors)
-            return render(request, "error.html")
+            return render(request, "introduction.html", {"form": form})
+
     else:
         form = SurveyForm(initial={"user": request.user})
         sampling = ["seen_brands", "produse_brands", "pastuse_brands"]

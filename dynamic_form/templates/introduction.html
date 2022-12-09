@@ -65,7 +65,7 @@
           {{ form.seen_brands.14 }}{{ form.seen_brands.14.label }}
         </div>
       </div>
-    </div> {% for error in form.seen_brands.errors %} <span style="color: red">{{ error }}</span> {% endfor %}
+    </div> {% for error in form.seen_brands.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %}
   </div> {% if form.produse_brands.help_text %} <small style="color: grey">{{ form.produse_brands.help_text }}</small> {% endif %} <div class="form-group">
     <h3>{{ form.produse_brands.label }}<span style="color: red"><sup>*</sup></h3></span>
     <div class="form-options">
@@ -124,7 +124,7 @@
           {{ form.produse_brands.14 }}{{ form.produse_brands.14.label }}
         </div>
       </div>
-    </div> {% for error in form.produse_brands.errors %} <span style="color: red">{{ error }}</span> {% endfor %}
+    </div> {% for error in form.produse_brands.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %}
   </div> {% if form.pastuse_brands.help_text %} <small style="color: grey">{{ form.pastuse_brands.help_text }}</small> {% endif %} <div class="form-group">
     <h3>{{ form.pastuse_brands.label }}<span style="color: red"><sup>*</sup></h3></span>
     <div class="form-options">
@@ -183,25 +183,25 @@
           {{ form.pastuse_brands.14 }}{{ form.pastuse_brands.14.label }}
         </div>
       </div>
-    </div> {% for error in form.pastuse_brands.errors %} <span style="color: red">{{ error }}</span> {% endfor %}
+    </div> {% for error in form.pastuse_brands.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %}
   </div>
   <div class="form-group" style="margin-top: 2em; margin-bottom: 2em;">
     <h3>{{ form.ad_blocking.label }}<span style="color: red"><sup>*</sup></h3></span>
     {{ form.ad_blocking }}
-  </div> {% for error in form.ad_blocking.errors %} <span style="color: red">{{ error }}</span> {% endfor %} <div class="form-group" style="margin-top: 2em; margin-bottom: 2em;">
+  </div> {% for error in form.ad_blocking.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %} <div class="form-group" style="margin-top: 2em; margin-bottom: 2em;">
     <h3>{{ form.yt_sub.label }}<span style="color: red"><sup>*</sup></h3></span>
     {{ form.yt_sub }}
-  </div> {% for error in form.yt_sub.errors %} <span style="color: red">{{ error }}</span> {% endfor %} <div class="form-group">
+  </div> {% for error in form.yt_sub.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %} <div class="form-group">
     <h3>{{ form.youtube_percentage.label }}<span style="color: red"><sup>*</sup></h3></span>
     <div class="form-options">
       {{ form.youtube_percentage }}
-    </div> {% for error in form.youtube_percentage.errors %} <span style="color: red">{{ error }}</span> {% endfor %}
+    </div> {% for error in form.youtube_percentage.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %}
   </div>
   <div class="form-group">
     <h3>{{ form.apprise_methods.label }}<span style="color: red"><sup>*</sup></h3></span>
     <div class="form-options">
       {{ form.apprise_methods }}
-    </div> {% for error in form.apprise_methods.errors %} <span style="color: red">{{ error }}</span> {% endfor %}
+    </div> {% for error in form.apprise_methods.errors %}  <div class="alert alert-danger" role="alert">{{ error }}</div> {% endfor %}
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
