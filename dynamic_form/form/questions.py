@@ -13,13 +13,13 @@ SECTORS = json.load(open("data/sectors_prompt.json"))
 
 
 class Video(models.Model):
-    url = models.CharField(max_length=255)
+    path = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
     watchset = models.IntegerField()
 
     def __str__(self):
-        return self.name + " - " + self.brand.name + " - " + self.url
+        return self.name + " - " + self.brand.name + " - " + self.path
 
 
 class Experience(models.Model):

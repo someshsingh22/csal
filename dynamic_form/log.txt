@@ -590,3 +590,274 @@ Traceback (most recent call last):
   File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/sqlite3/base.py", line 357, in execute
     return Database.Cursor.execute(self, query, params)
 django.db.utils.OperationalError: table form_hiddensurvey has no column named user_id
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /admin/form/video/add/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 686, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1890, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1750, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1808, in _changeform_view
+    self.log_addition(request, new_object, change_message)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 924, in log_addition
+    object_repr=str(obj),
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 22, in __str__
+    return self.name + " - " + self.brand.name + " - " + self.url
+AttributeError: 'Video' object has no attribute 'url'
+ERROR:django.request:Internal Server Error: /admin/form/video/add/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 686, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1890, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1750, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1808, in _changeform_view
+    self.log_addition(request, new_object, change_message)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 924, in log_addition
+    object_repr=str(obj),
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 22, in __str__
+    return self.name + " - " + self.brand.name + " - " + self.url
+AttributeError: 'Video' object has no attribute 'url'
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /admin/form/video/add/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 686, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/views/decorators/cache.py", line 62, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1890, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/utils/decorators.py", line 133, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1750, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 1808, in _changeform_view
+    self.log_addition(request, new_object, change_message)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/admin/options.py", line 924, in log_addition
+    object_repr=str(obj),
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 22, in __str__
+    return self.name + " - " + self.brand.name + " - " + self.url
+AttributeError: 'Video' object has no attribute 'url'
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view form.questions.brand_survey didn't return an HttpResponse object. It returned None instead.
+WARNING:django.request:Not Found: /hidden_user
+ERROR:django.request:Internal Server Error: /form/hidden_survey/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/sqlite3/base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: form_hiddensurvey.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 75, in hidden_survey
+    form.save()
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/forms/models.py", line 548, in save
+    self.instance.save()
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 812, in save
+    self.save_base(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 863, in save_base
+    updated = self._save_table(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 1006, in _save_table
+    results = self._do_insert(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 1047, in _do_insert
+    return manager._insert(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/sql/compiler.py", line 1660, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/sqlite3/base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: form_hiddensurvey.user_id
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view form.questions.brand_survey didn't return an HttpResponse object. It returned None instead.
+ERROR:django.request:Internal Server Error: /form/hidden_survey/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/sqlite3/base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: form_hiddensurvey.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 75, in hidden_survey
+    form.save()
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/forms/models.py", line 548, in save
+    self.instance.save()
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 812, in save
+    self.save_base(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 863, in save_base
+    updated = self._save_table(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 1006, in _save_table
+    results = self._do_insert(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/base.py", line 1047, in _do_insert
+    return manager._insert(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/sql/compiler.py", line 1660, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/backends/sqlite3/base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: form_hiddensurvey.user_id
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+ERROR:django.request:Internal Server Error: /form/hidden_survey/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 78, in hidden_survey
+    logging.log(logging.INFO, form.cleaned_data["user"])
+KeyError: 'user'
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+INFO:root:somesh
+INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7fa550761640>, 'video': <django.forms.models.ModelChoiceField object at 0x7fa5507616d0>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7fa550780f40>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7fa550780b50>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7fa550780850>}
+ERROR:django.request:Internal Server Error: /form/hidden_survey/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 81, in hidden_survey
+    return render(request, "ask.html")
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: ask.html
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+INFO:root:somesh
+INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7fec1f2e5c70>, 'video': <django.forms.models.ModelChoiceField object at 0x7fec1f2e5190>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7fec1f2e5c40>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7fec1f332d30>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7fec1f305340>}
+ERROR:django.request:Internal Server Error: /form/hidden_survey/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py", line 81, in hidden_survey
+    return redirect("")
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/shortcuts.py", line 48, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '' not found. '' is not a valid view function or pattern name.
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+INFO:root:somesh
+INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7fa98ca4ab80>, 'video': <django.forms.models.ModelChoiceField object at 0x7fa98c9927c0>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7fa98c9c31f0>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7fa98c9c3490>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7fa98c998520>}
+WARNING:django.request:Not Found: /index
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/adminform.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:{'user': <User: somesh>, 'video': <Video: Adobe1 - Adobe - /1.mp4>, 'ad_seen': False, 'brand_ads_seen': False, 'brand_heard': False}
+INFO:root:somesh
+INFO:root:{'user': <django.forms.models.ModelChoiceField object at 0x7ff083c2da60>, 'video': <django.forms.models.ModelChoiceField object at 0x7ff083c2d8e0>, 'ad_seen': <django.forms.fields.TypedChoiceField object at 0x7ff08400a160>, 'brand_ads_seen': <django.forms.fields.TypedChoiceField object at 0x7ff084014e20>, 'brand_heard': <django.forms.fields.TypedChoiceField object at 0x7ff08598f970>}
