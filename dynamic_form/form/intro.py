@@ -2,7 +2,6 @@ import json
 
 from django.db import models
 from django import forms
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -37,13 +36,6 @@ class Survey(models.Model):
     yt_sub = models.BooleanField()
     youtube_percentage = models.IntegerField()
     apprise_methods = models.ManyToManyField(AppriseMethod)
-    gpa = models.FloatField(
-        validators=[MinValueValidator(4.0), MaxValueValidator(10.0)]
-    )
-    for sector in SECTORS:
-        locals()[f"brand_{sector}"] = models.CharField(
-            max_length=255, blank=True, default=""
-        )
 
 
 class SurveyForm(forms.ModelForm):
@@ -81,7 +73,6 @@ class SurveyForm(forms.ModelForm):
             "yt_sub",
             "youtube_percentage",
             "apprise_methods",
-            "gpa",
         ]
         widgets = {
             "user": forms.HiddenInput,
@@ -96,17 +87,7 @@ class SurveyForm(forms.ModelForm):
             "produse_brands": "I remember using products of the following brands this year",
             "pastuse_brands": "I have used these brands at least once in the past",
             "apprise_methods": "How do you apprise yourself of the latest products and brands?",
-            "gpa": "What is your CGPA?",
         }
-        for sector in SECTORS:
-            fields.append(f"brand_{sector}")
-            labels[f"brand_{sector}"] = sector
-            widgets[f"brand_{sector}"] = forms.TextInput()
-
-    def __init__(self, *args, **kwargs):
-        super(SurveyForm, self).__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            pass
 
 
 @login_required
@@ -116,6 +97,9 @@ def intro_survey(request):
         if form.is_valid():
             form.save()
             return render(request, "thankyou.html")
+        else:
+            logging.info(form.errors)
+            return render(request, "error.html")
     else:
         form = SurveyForm(initial={"user": request.user})
         sampling = ["seen_brands", "produse_brands", "pastuse_brands"]

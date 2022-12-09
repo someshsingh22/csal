@@ -193,10 +193,11 @@ def brand_survey(request):
     logging.info(len(forms))
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
-        form.save()
-        page = request.GET.get("page")
-        next_page = int(page) + 1
-        return redirect("/form/brand?page={}".format(next_page))
+        if form.is_valid():
+            form.save()
+            page = request.GET.get("page")
+            next_page = int(page) + 1
+            return redirect("/form/brand?page={}".format(next_page))
     else:
         page_number = int(request.GET.get("page"))
         brand = brands[page_number - 1].name
