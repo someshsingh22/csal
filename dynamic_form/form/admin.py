@@ -1,8 +1,8 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from .intro import Brand, AppriseMethod
-from .questions import Video, Experience, Emotions
+from .intro import Brand, AppriseMethod, UserPastuse, UserProduse, UserSeen
+from .questions import Video, Experience, Emotions, BrandOptions
 
 
 class BrandResource(resources.ModelResource):
@@ -13,6 +13,21 @@ class BrandResource(resources.ModelResource):
 class AppriseMethodResource(resources.ModelResource):
     class Meta:
         model = AppriseMethod
+
+
+class UserPastuseResource(resources.ModelResource):
+    class Meta:
+        model = UserPastuse
+
+
+class UserProduseResource(resources.ModelResource):
+    class Meta:
+        model = UserProduse
+
+
+class UserSeenResource(resources.ModelResource):
+    class Meta:
+        model = UserSeen
 
 
 class VideoResource(resources.ModelResource):
@@ -30,12 +45,29 @@ class EmotionsResource(resources.ModelResource):
         model = Emotions
 
 
+class BrandOptionsResource(resources.ModelResource):
+    class Meta:
+        model = BrandOptions
+
+
 class BrandAdmin(ImportExportModelAdmin):
     resource_class = BrandResource
 
 
 class AppriseMethodAdmin(ImportExportModelAdmin):
     resource_class = AppriseMethodResource
+
+
+class UserPastuseAdmin(ImportExportModelAdmin):
+    resource_class = UserPastuseResource
+
+
+class UserProduseAdmin(ImportExportModelAdmin):
+    resource_class = UserProduseResource
+
+
+class UserSeenAdmin(ImportExportModelAdmin):
+    resource_class = UserSeenResource
 
 
 class VideoAdmin(ImportExportModelAdmin):
@@ -50,8 +82,32 @@ class EmotionsAdmin(ImportExportModelAdmin):
     resource_class = EmotionsResource
 
 
+class BrandOptionsAdmin(ImportExportModelAdmin):
+    resource_class = BrandOptionsResource
+
+
 for model_name, admin_name in zip(
-    [Brand, AppriseMethod, Video, Experience, Emotions],
-    [BrandAdmin, AppriseMethodAdmin, VideoAdmin, ExperienceAdmin, EmotionsAdmin],
+    [
+        Brand,
+        AppriseMethod,
+        UserPastuse,
+        UserProduse,
+        UserSeen,
+        Video,
+        Experience,
+        Emotions,
+        BrandOptions,
+    ],
+    [
+        BrandAdmin,
+        AppriseMethodAdmin,
+        UserPastuseAdmin,
+        UserProduseAdmin,
+        UserSeenAdmin,
+        VideoAdmin,
+        ExperienceAdmin,
+        EmotionsAdmin,
+        BrandOptionsAdmin,
+    ],
 ):
     admin.site.register(model_name, admin_name)
