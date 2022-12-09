@@ -16,10 +16,7 @@ class Video(models.Model):
     url = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
-    watchset = models.IntegerChoices(
-        (1, "A"),
-        (2, "B"),
-    )
+    watchset = models.IntegerField()
 
     def __str__(self):
         return self.name + " - " + self.brand.name + " - " + self.url
