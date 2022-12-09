@@ -1,5 +1,3 @@
-import json
-
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
@@ -8,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 import logging
 
 logging.basicConfig(level=logging.INFO, filename="log.txt")
-SECTORS = json.load(open("data/sectors.json"))
 
 
 class Brand(models.Model):
@@ -96,6 +93,9 @@ class SurveyForm(forms.ModelForm):
 
 @login_required
 def intro_survey(request):
+    if Survey.objects.filter(user=request.user).exists():
+        return render(request, "thankyou.html")
+
     if request.method == "POST":
         form = SurveyForm(request.POST)
         if form.is_valid():
