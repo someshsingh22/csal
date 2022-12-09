@@ -1215,3 +1215,15 @@ INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/intro.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/questions.py changed, reloading.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/brand/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/questions.py", line 130, in brand_survey
+    brand=brands[curr_page - 1],
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/db/models/query.py", line 425, in __getitem__
+    raise ValueError("Negative indexing is not supported.")
+ValueError: Negative indexing is not supported.
