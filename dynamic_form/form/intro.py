@@ -113,7 +113,4 @@ def intro_survey(request):
         form.fields["produse_brands"].queryset = UserProduse.objects.get(
             user=request.user
         ).brands.all()
-        form.fields["pastuse_brands"].queryset = UserPastuse.objects.get(
-            user=request.user
-        ).brands.all()
     return render(request, "introduction.html", {"form": form})

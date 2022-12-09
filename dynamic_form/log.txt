@@ -985,3 +985,17 @@ INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/admin.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
 INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/admin.py changed, reloading.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+ERROR:django.request:Internal Server Error: /form/
+Traceback (most recent call last):
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/someshs/GitHub/csal/csal/lib/python3.9/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/someshs/GitHub/csal/dynamic_form/form/intro.py", line 116, in intro_survey
+    form.fields["pastuse_brands"].queryset = UserPastuse.objects.get(
+NameError: name 'UserPastuse' is not defined
+INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/form/intro.py changed, reloading.
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
