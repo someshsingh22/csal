@@ -1355,3 +1355,6 @@ Traceback (most recent call last):
 django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 15: 'else'. Did you forget to register or load this tag?
 INFO:django.utils.autoreload:/Users/someshs/GitHub/csal/dynamic_form/dynamic_form/settings.py changed, reloading.
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.request:Not Found: /favicon.ico
