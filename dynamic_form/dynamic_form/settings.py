@@ -134,8 +134,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -158,7 +156,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
-SITE_ID = 4
+SITE_ID = 5
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"

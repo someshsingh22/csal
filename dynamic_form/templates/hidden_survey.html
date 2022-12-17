@@ -1,0 +1,14 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <input type="submit" value="Submit">
+</form>
+
+<h3>Remaining Videos</h3>
+    {% for video in remaining_videos %}
+        <p>{{ video }}</p>
+    {% endfor %}

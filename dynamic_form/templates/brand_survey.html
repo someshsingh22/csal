@@ -2,52 +2,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>  
-    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
     {% load static %}
     {% load widget_tweaks %}
     <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
+
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}
-        {% if form.non_field_errors %}
-            <div class="alert alert-danger" role="alert">
-            {% for error in form.non_field_errors %}
-                {{ error }}
-            {% endfor %}
-            </div>
-        {% endif %}
-        {% for field in form.visible_fields %}
-            <div class="form-group">
-            <h2>{{ field.label_tag }}<br></h2>
-    
-            {% if form.is_bound %}
-                {% if field.errors %}
-                {% render_field field class="form-control is-invalid" %}
-                {% for error in field.errors %}
-                    <div class="invalid-feedback">
-                    {{ error }}
-                    </div>
-                {% endfor %}
-                {% else %}
-                {% render_field field class="form-control is-valid"%}
-                {% endif %}
-            {% else %}
-                {% render_field field class="form-control" %}
-            {% endif %}
-    
-            {% if field.help_text %}
-                <small class="form-text text-muted">{{ field.help_text }}</small>
-            {% endif %}
-            </div>
-        {% endfor %}
-        {% if has_next %}
-            <button type="submit" class="btn btn-primary" name="next" value="next">Next</button>
-        {% endif %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+  <form method="post">
+    <h1 style="text-align:center;">{{ brand }}</h1>
+      {% csrf_token %}
+      {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+      {% endfor %}
+      
+      {% for field in form.visible_fields %}
+      {% if field.name == 'scenes_description' %}
+      <div class="form-group">
+        <h3>For the {{ brand }} ad, I remember seeing the following:</h3>
+        <p>Write Scene Descriptions</p>
+        {{ form.scenes_description }}
+      </div>
+      {% else %}
+        <div class="form-group">
+          <h3>{{ field.label }}</h3>
+          <div class="form-options">
+          {{ field }}
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 </body>

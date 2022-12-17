@@ -1,53 +1,85 @@
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    {% load static %}
-    {% load widget_tweaks %}
-    <link rel="stylesheet" href="{% static 'form.css' %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> {% load static %} {% load widget_tweaks %}
+  <link rel="stylesheet" href="{% static 'form.css' %}">
 </head>
-
-
-<form method="post" novalidate>
-  {% csrf_token %}
-
-  {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field }}
-  {% endfor %}
-
-  {% if form.non_field_errors %}
-    <div class="alert alert-danger" role="alert">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
+<form method="post"> {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field }} {% endfor %} 
+  <div class="form-group">
+    <h3>{{ form.remembered_brands.label }}</h3>
+    <div class="form-options">
+      <div class="row">
+        <div class="col-3">
+          {{ form.remembered_brands.0 }}{{ form.remembered_brands.0.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.1 }}{{ form.remembered_brands.1.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.2 }}{{ form.remembered_brands.2.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.3 }}{{ form.remembered_brands.3.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          {{ form.remembered_brands.4 }}{{ form.remembered_brands.4.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.5 }}{{ form.remembered_brands.5.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.6 }}{{ form.remembered_brands.6.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.7 }}{{ form.remembered_brands.7.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          {{ form.remembered_brands.8 }}{{ form.remembered_brands.8.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.9 }}{{ form.remembered_brands.9.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.10 }}{{ form.remembered_brands.10.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.11 }}{{ form.remembered_brands.11.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          {{ form.remembered_brands.12 }}{{ form.remembered_brands.12.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.13 }}{{ form.remembered_brands.13.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.14 }}{{ form.remembered_brands.14.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.15 }}{{ form.remembered_brands.15.label }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          {{ form.remembered_brands.16 }}{{ form.remembered_brands.16.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.17 }}{{ form.remembered_brands.17.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.18 }}{{ form.remembered_brands.18.label }}
+        </div>
+        <div class="col-3">
+          {{ form.remembered_brands.19 }}{{ form.remembered_brands.19.label }}
+        </div>
+      </div>
     </div>
-  {% endif %}
-
-  {% for field in form.visible_fields %}
-    <div class="form-group">
-      <h2>{{ field.label_tag }}<br></h2>
-
-      {% if form.is_bound %}
-        {% if field.errors %}
-          {% render_field field class="form-control is-invalid" %}
-          {% for error in field.errors %}
-            <div class="invalid-feedback">
-              {{ error }}
-            </div>
-          {% endfor %}
-        {% else %}
-          {% render_field field class="form-control is-valid"%}
-        {% endif %}
-      {% else %}
-        {% render_field field class="form-control" %}
-      {% endif %}
-
-      {% if field.help_text %}
-        <small class="form-text text-muted">{{ field.help_text }}</small>
-      {% endif %}
-    </div>
-  {% endfor %}
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+  </div> {% for error in form.remembered_brands.errors %} <div class="alert alert-danger" role="alert">
+    {{ error }}
+  </div> {% endfor %} <button type="submit" class="btn btn-primary">Submit</button>
 </form>
