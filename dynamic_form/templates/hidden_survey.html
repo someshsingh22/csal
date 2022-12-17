@@ -7,3 +7,8 @@
     {% endif %}
     <input type="submit" value="Submit">
 </form>
+
+<h3>Remaining Videos</h3>
+    {% for video in remaining_videos %}
+        <p>{{ video }}</p>
+    {% endfor %}

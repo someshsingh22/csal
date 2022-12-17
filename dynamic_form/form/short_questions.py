@@ -4,40 +4,13 @@ from collections import OrderedDict
 
 from django import forms
 from django.db import models
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-
 from .intro import Brand
+from .questions import Experience, BrandOptions
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
-
-class Video(models.Model):
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    path = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    watchset = models.IntegerField()
-
-    def __str__(self):
-        return self.path
-
-
-class Experience(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    videos = models.ManyToManyField(Video)
-
-    def __str__(self):
-        return (
-            f"User:{self.user}:{','.join([str(video) for video in self.videos.all()])}"
-        )
-
-
-class BrandOptions(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    brands = models.ManyToManyField(Brand)
-
-
-class RememberedBrand(models.Model):
+class RememberedBrand_L(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     scenes_description = models.TextField()
@@ -122,7 +95,7 @@ class RememberedBrandForm(forms.ModelForm):
     )
 
     class Meta:
-        model = RememberedBrand
+        model = RememberedBrand_L
         fields = [
             "experience",
             "brand",
@@ -155,39 +128,39 @@ class RememberedBrandForm(forms.ModelForm):
         ]
 
 
-def brand_survey(request):
-    if not OverallQuestionSurvey.objects.filter(exp__user=request.user).exists():
-        return redirect("/form/overall")
+def brand_survey_l(request):
+    if not OverallQuestionSurvey_L.objects.filter(exp__user=request.user).exists():
+        return redirect("/form/l_overall")
 
     if not request.GET.get("page"):
         try:
-            return redirect("/form/brand?page=1")
+            return redirect("/form/l_brand?page=1")
         except IndexError:
             return render(request, "error.html", {"message": "No brands to survey"})
 
     curr_page = int(request.GET.get("page"))
 
-    survey = OverallQuestionSurvey.objects.get(exp__user=request.user)
+    survey = OverallQuestionSurvey_L.objects.get(exp__user=request.user)
     brands = survey.remembered_brands.all()
 
     if curr_page > len(brands):
         return render(request, "thankyou.html")
 
-    if RememberedBrand.objects.filter(
+    if RememberedBrand_L.objects.filter(
         experience__user=request.user,
         brand=brands[curr_page - 1],
     ).exists():
-        return redirect("/form/brand?page={}".format(curr_page + 1))
+        return redirect("/form/l_brand?page={}".format(curr_page + 1))
 
     if request.method == "POST":
         form = RememberedBrandForm(request.POST)
         if form.is_valid():
             form.save()
             next_page = curr_page + 1
-            return redirect("/form/brand?page={}".format(next_page))
+            return redirect("/form/l_brand?page={}".format(next_page))
         else:
             logging.error(form.errors)
-            return redirect("/form/brand?page={}".format(curr_page))
+            return redirect("/form/l_brand?page={}".format(curr_page))
     else:
         brand = brands[curr_page - 1].name
         curr_form = RememberedBrandForm(
@@ -210,14 +183,14 @@ def brand_survey(request):
         return render(request, "brand_survey.html", {"form": curr_form, "brand": brand})
 
 
-class OverallQuestionSurvey(models.Model):
+class OverallQuestionSurvey_L(models.Model):
     exp = models.ForeignKey(Experience, on_delete=models.CASCADE)
     remembered_brands = models.ManyToManyField(Brand)
 
 
 class OverallQuestionSurveyForm(forms.ModelForm):
     class Meta:
-        model = OverallQuestionSurvey
+        model = OverallQuestionSurvey_L
         fields = ["exp", "remembered_brands"]
         widgets = {
             "exp": forms.HiddenInput,
@@ -228,15 +201,15 @@ class OverallQuestionSurveyForm(forms.ModelForm):
         }
 
 
-def overall_survey(request):
-    if OverallQuestionSurvey.objects.filter(exp__user=request.user).exists():
-        return redirect("/form/brand?page=1")
+def overall_survey_l(request):
+    if OverallQuestionSurvey_L.objects.filter(exp__user=request.user).exists():
+        return redirect("/form/l_brand?page=1")
 
     if request.method == "POST":
         form = OverallQuestionSurveyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/form/brand?page=1")
+            return redirect("/form/l_brand?page=1")
         else:
             return render(request, "short_term.html", {"form": form})
     else:

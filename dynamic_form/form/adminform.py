@@ -14,6 +14,7 @@ class HiddenSurvey(models.Model):
     ad_seen = models.BooleanField()
     brand_ads_seen = models.BooleanField()
     brand_heard = models.BooleanField()
+    prod_clear = models.BooleanField()
 
 
 class SelectUserForm(forms.Form):
@@ -40,15 +41,21 @@ class HiddenSurveyForm(forms.ModelForm):
         choices=((False, "No"), (True, "Yes")),
         label="Have you heard about that brand before?",
     )
+    prod_clear = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=((False, "No"), (True, "Yes")),
+        label="Is it clear what product is the ad trying to sell?",
+    )
 
     class Meta:
         model = HiddenSurvey
-        fields = ["user", "video", "ad_seen", "brand_ads_seen", "brand_heard"]
+        fields = ["user", "video", "ad_seen", "brand_ads_seen", "brand_heard", "prod_clear"]
         widgets = {
             "user": forms.HiddenInput,
             "ad_seen": forms.TypedChoiceField,
             "brand_ads_seen": forms.TypedChoiceField,
             "brand_heard": forms.TypedChoiceField,
+            "prod_clear": forms.TypedChoiceField,
         }
 
 
@@ -66,8 +73,7 @@ def hidden_user(request):
     else:
         form = SelectUserForm()
         users = User.objects.all().exclude(username="someshs")
-        form.fields["user"].queryset = users.order_by("email")
-        form.fields["user"].label_from_instance = lambda obj: obj.email
+        form.fields["user"].label_from_instance = lambda obj: str(obj.id)+'__'+str(obj.email) + '__' + str(obj.first_name) + str(obj.last_name)
         return render(request, "hidden_user.html", {"form": form})
 
 
@@ -75,18 +81,32 @@ def hidden_survey(request):
     if request.user != User.objects.get(username="someshs"):
         return render(request, "error.html")
 
+    user_id = request.GET.get("user")
+    user = User.objects.get(id=user_id)
+    user_videos = Experience.objects.get(user=user).videos.all()
+
+    if HiddenSurvey.objects.filter(user=user).exists():
+        completed = HiddenSurvey.objects.filter(user=user)
+        video_completed = [i.video for i in completed]
+        remaining_videos = user_videos.exclude(id__in=[v.id for v in video_completed])
+    else:
+        remaining_videos = user_videos
+
     if request.method == "POST":
         form = HiddenSurveyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/admin")
+            if len(remaining_videos)==0:
+                return redirect(f"/admin/")
+            else:
+                return redirect(f"/form/hidden_survey/?user={user_id}")
         else:
             return render(request, "error.html")
 
     else:
-        user_id = request.GET.get("user")
-        user = User.objects.get(id=user_id)
-        user_videos = Experience.objects.get(user=user).videos.all()
         form = HiddenSurveyForm(initial={"user": user})
         form.fields["video"].queryset = user_videos
-        return render(request, "hidden_survey.html", {"form": form})
+        if len(remaining_videos)==0:
+            return redirect(f"/admin/")
+        else:
+            return render(request, "hidden_survey.html", {"form": form, "remaining_videos": remaining_videos})

@@ -9,11 +9,12 @@
 <body>
     <div class="signin-form">
         <h1>Eye Tracking Experiments</h1>
-        <h2>Sign In</h2>
         {% if user.is_authenticated %}
+        <h2>Participant {{ user.id }}</h2>
         <p>Welcome {{ user.email }}! Please Fill out the following form</p>
         <button><a style="color: #fff;" href="/form">Form Link</a></button>
         {% else %}
+        <h2>Sign In</h2>
         <p>Log in using your BITS Mail</p>
         <button><a style="color: #fff;" href="{% provider_login_url 'google' %}">Google Log in</a></button>
         {% endif %}
