@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('form', '0002_rememberedbrand_attention_check_and_more'),
+        ("form", "0002_rememberedbrand_attention_check_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='hiddensurvey',
-            name='prod_clear',
+            model_name="hiddensurvey",
+            name="prod_clear",
             field=models.BooleanField(default=False),
             preserve_default=False,
         ),

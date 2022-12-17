@@ -13,5 +13,5 @@ urlpatterns = [
     path("hidden_survey/", hidden_survey, name="hidden_survey"),
     path("l_overall/", overall_survey_l, name="overall_survey"),
     path("l_brand/", brand_survey_l, name="brand_survey"),
-    path("status", user_status, name="Status")
+    path("status", user_status, name="Status"),
 ]

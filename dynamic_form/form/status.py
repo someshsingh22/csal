@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .short_questions import OverallQuestionSurvey_L
 from .questions import OverallQuestionSurvey
 
+
 def user_status(request):
     if request.user.is_authenticated:
         if request.user.id > 121:
@@ -31,4 +32,6 @@ def user_status(request):
         re = True
         link = "https://someshs.pythonanywhere.com/"
 
-    return render(request, "status.html", {"message":message, "redirect": re, "link": link})
+    return render(
+        request, "status.html", {"message": message, "redirect": re, "link": link}
+    )

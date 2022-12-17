@@ -49,7 +49,14 @@ class HiddenSurveyForm(forms.ModelForm):
 
     class Meta:
         model = HiddenSurvey
-        fields = ["user", "video", "ad_seen", "brand_ads_seen", "brand_heard", "prod_clear"]
+        fields = [
+            "user",
+            "video",
+            "ad_seen",
+            "brand_ads_seen",
+            "brand_heard",
+            "prod_clear",
+        ]
         widgets = {
             "user": forms.HiddenInput,
             "ad_seen": forms.TypedChoiceField,
@@ -73,7 +80,14 @@ def hidden_user(request):
     else:
         form = SelectUserForm()
         users = User.objects.all().exclude(username="someshs")
-        form.fields["user"].label_from_instance = lambda obj: str(obj.id)+'__'+str(obj.email) + '__' + str(obj.first_name) + str(obj.last_name)
+        form.fields["user"].label_from_instance = (
+            lambda obj: str(obj.id)
+            + "__"
+            + str(obj.email)
+            + "__"
+            + str(obj.first_name)
+            + str(obj.last_name)
+        )
         return render(request, "hidden_user.html", {"form": form})
 
 
@@ -96,7 +110,7 @@ def hidden_survey(request):
         form = HiddenSurveyForm(request.POST)
         if form.is_valid():
             form.save()
-            if len(remaining_videos)==0:
+            if len(remaining_videos) == 0:
                 return redirect(f"/admin/")
             else:
                 return redirect(f"/form/hidden_survey/?user={user_id}")
@@ -106,7 +120,11 @@ def hidden_survey(request):
     else:
         form = HiddenSurveyForm(initial={"user": user})
         form.fields["video"].queryset = user_videos
-        if len(remaining_videos)==0:
+        if len(remaining_videos) == 0:
             return redirect(f"/admin/")
         else:
-            return render(request, "hidden_survey.html", {"form": form, "remaining_videos": remaining_videos})
+            return render(
+                request,
+                "hidden_survey.html",
+                {"form": form, "remaining_videos": remaining_videos},
+            )

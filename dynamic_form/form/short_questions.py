@@ -10,6 +10,7 @@ from .questions import Experience, BrandOptions
 
 logging.basicConfig(level=logging.INFO, filename="debug.log")
 
+
 class RememberedBrand_L(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
@@ -23,6 +24,7 @@ class RememberedBrand_L(models.Model):
 
     def __str__(self):
         return f"User:{self.experience.user}:{self.brand}"
+
 
 questions = [
     "I am paid bi-weekly by leprechauns",
@@ -51,6 +53,7 @@ choices = [
     ["Agree", "Disagree"],
     ["Agree", "Disagree"],
 ]
+
 
 class RememberedBrandForm(forms.ModelForm):
     AUDIO_CHOICES = [
@@ -176,7 +179,9 @@ def brand_survey_l(request):
                 )
         fields = list(curr_form.fields)
         total_fields = len(fields)
-        fields.insert(random.randint(total_fields-3, total_fields), "attention_check_answer")
+        fields.insert(
+            random.randint(total_fields - 3, total_fields), "attention_check_answer"
+        )
         curr_form.fields = OrderedDict(
             (field, curr_form.fields[field]) for field in fields
         )

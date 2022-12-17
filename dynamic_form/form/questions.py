@@ -56,6 +56,7 @@ class RememberedBrand(models.Model):
     def __str__(self):
         return f"User:{self.experience.user}:{self.brand}"
 
+
 questions = [
     "I am paid bi-weekly by leprechauns",
     "In the last one year, I have suffered from congenital parantoscopy",
@@ -83,6 +84,7 @@ choices = [
     ["Agree", "Disagree"],
     ["Agree", "Disagree"],
 ]
+
 
 class RememberedBrandForm(forms.ModelForm):
     AUDIO_CHOICES = [
@@ -208,7 +210,9 @@ def brand_survey(request):
                 )
         fields = list(curr_form.fields)
         total_fields = len(fields)
-        fields.insert(random.randint(total_fields-3, total_fields), "attention_check_answer")
+        fields.insert(
+            random.randint(total_fields - 3, total_fields), "attention_check_answer"
+        )
         curr_form.fields = OrderedDict(
             (field, curr_form.fields[field]) for field in fields
         )

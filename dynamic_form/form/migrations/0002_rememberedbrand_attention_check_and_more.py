@@ -6,19 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('form', '0001_initial'),
+        ("form", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='rememberedbrand',
-            name='attention_check',
-            field=models.CharField(default='Default', max_length=256),
+            model_name="rememberedbrand",
+            name="attention_check",
+            field=models.CharField(default="Default", max_length=256),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='rememberedbrand',
-            name='attention_check_answer',
+            model_name="rememberedbrand",
+            name="attention_check_answer",
             field=models.IntegerField(default=1),
             preserve_default=False,
         ),
