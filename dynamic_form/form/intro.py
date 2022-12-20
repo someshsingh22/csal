@@ -42,21 +42,6 @@ class Survey(models.Model):
     apprise_methods = models.ManyToManyField(AppriseMethod)
 
 
-class SeenBrands(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    seen_brands = models.ManyToManyField(Brand)
-
-
-class ProdUseBrands(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    produse_brands = models.ManyToManyField(Brand)
-
-
-class PastUseBrands(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pastuse_brands = models.ManyToManyField(Brand)
-
-
 class SurveyForm(forms.ModelForm):
     YOUTUBE_PERCENTAGE_CHOICES = [
         (1, "<10% on mobile"),
